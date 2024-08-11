@@ -1,0 +1,219 @@
+{% extends "admin_layout.html" %}
+{% load static %}
+
+{% block title %}
+  Admin Student History - Health Services Office | BSU Alangilan
+{% endblock title %}
+
+{% block content %}
+  <div class="content">
+
+    <div class="student-status-container">
+      <a href="student-app.html" class="btn student-status">Appointment</a>
+      <a href="student-records.html" class="btn student-status">Records</a>
+      <a href="student-history.html" class="btn student-status active">History</a>
+    </div>
+
+    <!-- Appointment Section -->
+    <div class="history-section">
+      <div class="history-table">
+        <table class="table table-striped">
+          <thead>
+            <tr class="table-row">
+              <th>Student ID</th>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Nurse Assigned</th>
+              <th>Purpose</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="employeeTableBody">
+            <!-- Sample row -->
+            <tr>
+              <td>A21-0089</td>
+              <td>Ahze Liam</td>
+              <td>02/21/2024</td>
+              <td>1:00 pm</td>
+              <td>Kotoko Aihara</td>
+              <td>Pre-Enrollment Medical Examination</td>
+              <td>
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <a class="view-button" href="student-history-sampleProfile.html"><i class="fas fa-eye"></i></a>
+              </td>
+            </tr>
+            <tr>
+              <td>A22-0423</td>
+              <td>Seki Cat</td>
+              <td>02/23/2024</td>
+              <td>2:00 pm</td>
+              <td>Maxine Mayfield</td>
+              <td>Pre-Enrollment Medical Examination</td>
+              <td>
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>A23-0212</td>
+              <td>Kisses Minches</td>
+              <td>02/23/2024</td>
+              <td>2:00 pm</td>
+              <td>Maxine Mayfield</td>
+              <td>Pre-Enrollment Medical Examination</td>
+              <td>
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>A21-0198</td>
+              <td>Kyla Pot</td>
+              <td>03/01/2024</td>
+              <td>11:00 am</td>
+              <td>Yuji Itadori</td>
+              <td>OJT Medical examination</td>
+              <td>
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>A23-0093</td>
+              <td>Thomas Shelby</td>
+              <td>03/08/2024</td>
+              <td>9:00 am</td>
+              <td>Lucas Sinclair</td>
+              <td>OJT Medical examination</td>
+              <td>
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>A21-0089</td>
+              <td>Azraelu Morningstar</td>
+              <td>02/21/2024</td>
+              <td>1:00 pm</td>
+              <td>Yuji Itadori</td>
+              <td>OJT Medical Examination</td>
+              <td>
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>A22-0423</td>
+              <td>Seki Cat</td>
+              <td>02/23/2024</td>
+              <td>2:00 pm</td>
+              <td>Maxine Mayfield</td>
+              <td>Pre-Enrollment Medical Examination</td>
+              <td>
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>A23-0212</td>
+              <td>Kisses Minches</td>
+              <td>02/23/2024</td>
+              <td>2:00 pm</td>
+              <td>Maxine Mayfield</td>
+              <td>Pre-Enrollment Medical Examination</td>
+              <td>
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>A21-0198</td>
+              <td>Kyla Pot</td>
+              <td>03/01/2024</td>
+              <td>11:00 am</td>
+              <td>Yuji Itadori</td>
+              <td>OJT Medical examination</td>
+              <td>
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>A23-0093</td>
+              <td>Thomas Shelby</td>
+              <td>03/08/2024</td>
+              <td>9:00 am</td>
+              <td>Lucas Sinclair</td>
+              <td>OJT Medical examination</td>
+              <td>
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- End Appointment Section -->
+
+  </div>
+{% endblock content %}
+
+{% block section %}
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeEditModal()">&times;</span>
+      <h2>Edit Appointment</h2>
+      <form id="editForm">
+        <div class="form-row">
+          <div class="info-group">
+            <label for="editStudentID">Student ID:</label>
+            <input type="text" id="editStudentID" name="editStudentID" readonly>
+          </div>
+          <div class="info-group">
+            <label for="editName">Name:</label>
+            <input type="text" id="editName" name="editName" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="info-group">
+            <label for="editDate">Date:</label>
+            <input type="date" id="editDate" name="editDate" required>
+          </div>
+          <div class="info-group">
+            <label for="editTime">Time:</label>
+            <input type="time" id="editTime" name="editTime" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="info-group">
+            <label for="editNurse">Nurse Assigned:</label>
+            <input type="text" id="editNurse" name="editNurse" required>
+          </div>
+          <div class="info-group">
+            <label for="editPurpose">Purpose:</label>
+            <input type="text" id="editPurpose" name="editPurpose" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="info-group save-btn">
+            <button type="button" onclick="saveEdit()">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock section %}

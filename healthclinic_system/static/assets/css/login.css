@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url('../img/background.png') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(212, 189, 189, 0.479); 
+  z-index: 1;
+}
+
+.login-container {
+  background-color: rgb(255, 255, 255);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 750px;
+  color:#be2e2e;
+  position: relative;
+  z-index: 2;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.login-logo {
+  height: 150px;
+  width: 170px;
+  margin-right: 40px;
+  margin-left: 20px;
+}
+
+.header h2 {
+  font-size: 2.25rem;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.input-group input {
+  width: 500px;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #e6e6e6b6;
+  
+}
+
+.role-group {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.role-group button {
+  margin-right: 10px;
+  padding: 0.60rem 1.5rem;
+  background-color: #ddd;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: -20px;
+}
+
+.role-group button.active {
+  background-image: linear-gradient(180deg, rgb(219, 146, 11) 26%, rgb(248, 212, 51) 100%);
+  color: white;
+}
+
+.btn {
+  width: 90px;
+  height: 35px;
+  background-color: #be2e2e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.25rem;
+  text-align: center;
+  margin-right: 93px;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.error {
+  color: rgb(211, 27, 27);
+  margin-top: 10px;
+}

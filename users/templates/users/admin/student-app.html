@@ -1,0 +1,140 @@
+{% extends "admin_layout.html" %}
+{% load static %}
+
+{% block title %}
+  Admin Student-App - Health Services Office | BSU Alangilan
+{% endblock title %}
+
+{% block content %}
+  <div class="content">
+
+    <div class="student-status-container">
+      <a href="student-app.html" class="btn student-status active">Appointment</a>
+      <a href="student-records.html" class="btn student-status">Records</a>
+      <a href="student-history.html" class="btn student-status">History</a>
+    </div>
+
+    <!-- Appointment Section -->
+    <div class="appointment-section">
+      
+      <div class="appointment-header">
+        <div class="current-appointment">
+          <span>106</span>
+          <p>Current Appointment</p>
+        </div>
+        
+        <div class="completed-appointment">
+          <span>74</span>
+          <p>Completed Appointment</p>
+        </div>
+
+        <div class="declined-appointment">
+          <span>74</span>
+          <p>Declined Appointment</p>
+        </div>
+
+        <div class="total-appointment">
+          <span>106</span>
+          <p>Total Appointment</p>
+        </div>
+
+      </div>
+
+      <div id="date-input-container">
+        <label for="date">Date:</label>
+        <input type="date" id="dateInput" class="form-control" onchange="goToSelectedDate()">
+      </div>
+
+      <div class="appointment-content">
+        
+        <div class="appointment-date">
+          
+          <table class="table calendar-table">
+            <thead>
+              <tr>
+                <th><button class="btn btn-outline-secondary" onclick="prevMonth()">&#8249;</button></th>
+                <th colspan="5" id="calendar-month" class="text-center" onclick="toggleDateInput()"></th>
+                <th><button class="btn btn-outline-secondary" onclick="nextMonth()">&#8250;</button></th>
+              </tr>
+              <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+              </tr>
+            </thead>
+            <tbody id="calendar-body">
+              <!-- Calendar dates will be dynamically generated here -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="appointment-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Patient</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="appointmentList">
+              <tr data-date="2024-07-08">
+                <td>8:00 am</td>
+                <td>Antalan Angelica</td>
+                <td><span class="status ongoing">Ongoing</span></td>
+                <td>
+                  <button class="btn btn-success btn-sm" onclick="markAsComplete(this)"><i class="fas fa-check"></i> Complete</button>
+                  <button class="btn btn-danger btn-sm" onclick="markAsDeclined(this)"><i class="fas fa-times"></i> Decline</button>
+                </td>
+              </tr>
+              <tr data-date="2024-07-08">
+                <td>8:20 am</td>
+                <td>Arcadio Ricardo</td>
+                <td><span class="status ongoing">Ongoing</span></td>
+                <td>
+                  <button class="btn btn-success btn-sm" onclick="markAsComplete(this)"><i class="fas fa-check"></i> Complete</button>
+                  <button class="btn btn-danger btn-sm" onclick="markAsDeclined(this)"><i class="fas fa-times"></i> Decline</button>
+                </td>
+              </tr>
+              <tr data-date="2024-07-08">
+                <td>8:40 am</td>
+                <td>Delfin John Carlo</td>
+                <td><span class="status ongoing">Ongoing</span></td>
+                <td>
+                  <button class="btn btn-success btn-sm" onclick="markAsComplete(this)"><i class="fas fa-check"></i> Complete</button>
+                  <button class="btn btn-danger btn-sm" onclick="markAsDeclined(this)"><i class="fas fa-times"></i> Decline</button>
+                </td>
+              </tr>
+              <tr data-date="2024-07-08">
+                <td>9:00 am</td>
+                <td>De Castro Miguel</td>
+                <td><span class="status ongoing">Ongoing</span></td>
+                <td>
+                  <button class="btn btn-success btn-sm" onclick="markAsComplete(this)"><i class="fas fa-check"></i> Complete</button>
+                  <button class="btn btn-danger btn-sm" onclick="markAsDeclined(this)"><i class="fas fa-times"></i> Decline</button>
+                </td>
+              </tr>
+
+              <tr data-date="2024-07-08">
+                <td>9:30 am</td>
+                <td>Moko Mon</td>
+                <td><span class="status ongoing">Ongoing</span></td>
+                <td>
+                  <button class="btn btn-success btn-sm" onclick="markAsComplete(this)"><i class="fas fa-check"></i> Complete</button>
+                  <button class="btn btn-danger btn-sm" onclick="markAsDeclined(this)"><i class="fas fa-times"></i> Decline</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- End Appointment Section -->
+
+  </div>
+{% endblock content %}

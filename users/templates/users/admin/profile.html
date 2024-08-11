@@ -1,0 +1,287 @@
+{% extends "admin_layout.html" %}
+{% load static %}
+
+{% block title %}
+  Admin Profile - Health Services Office | BSU Alangilan
+{% endblock title %}
+
+{% block style %}
+  <style>
+    .main-container {
+      display: flex;
+      justify-content: center; 
+      align-items: center;     
+      height: 100vh;          
+      padding: 20px;         
+      overflow: hidden;       
+    }
+
+    .profile-container {
+      position: relative;
+      width: 1000px; 
+      height: auto; 
+      max-height: 100%; 
+      padding: 20px;
+      background: #FFFF;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      margin-left: 10px;
+      margin-top: 12%; 
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.443);
+      display: flex;
+      flex-direction: column;
+      overflow: auto; 
+    }
+
+    .profile-details {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      margin-left: 20px; 
+      padding-bottom: 10px;
+    }
+
+    .profile-image {
+      width: 200px; 
+      height: 200px; 
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+
+    .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-info .name {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+      margin-top: 10px;
+      color: maroon;
+    }
+
+    .profile-info .info-item {
+      font-size: 1.5rem; 
+      margin-bottom: 0px;
+    }
+
+    .separator {
+      width: 90%;
+      height: 2px;
+      background-color: #ddd;
+      margin-left: 20px; 
+    }
+
+    .other-info {
+      margin-left: 50px; 
+      margin-top: 20px;
+      font-size: 0.9rem; 
+    }
+
+    .other-info h3 {
+      font-size: 2rem; 
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .other-info .info-item {
+      font-size: 1.2rem; 
+    }
+
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .info-column {
+      flex: 1;
+      min-width: 250px; 
+    }
+
+    .edit-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background-color: #F12C2C;
+      color: white;
+      border: none;
+      padding: 8px 16px; 
+      border-radius: 5px;
+      font-size: 0.9rem; 
+      cursor: pointer;
+    }
+
+    .edit-button:hover {
+      background-color: #a62e2e;
+    }
+
+    .modal-dialog {
+      max-width: 600px;
+    }
+
+    .modal-content {
+      border-radius: 10px;
+    }
+
+    .modal-header {
+      background-color: #f8f9fa;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .modal-footer {
+      background-color: #f8f9fa;
+      border-top: 1px solid #e9ecef;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .modal-body .form-label {
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      background-color: #F12C2C;
+      border-color: #F12C2C;
+    }
+
+    .btn-primary:hover {
+      background-color: #a62e2e;
+      border-color: #a62e2e;
+    }
+  </style>
+{% endblock style %}
+
+{% block content %}
+  <div class="content">
+    <div class="profile-container">
+      <div class="profile-details">
+        <div class="profile-image">
+          <img id="profileImage" src="{% static 'admin/assets/img/image.png' %}" alt="Profile Image">
+        </div>
+        <div class="profile-info">
+          <div class="name" id="profile-name">LeBron Raymone James</div>
+          <div class="info-item" id="profile-position"><strong>Position:</strong> Nurse</div>
+        </div>
+      </div>
+
+      <div class="separator"></div>
+
+      <div class="other-info">
+        <h3>Other Information</h3>
+        <div class="info-row">
+          <div class="info-column">
+            <div class="info-item" id="profile-age"><strong>Age:</strong> 39</div>
+            <div class="info-item" id="profile-contact"><strong>Contact Number:</strong> 09293456789</div>
+            <div class="info-item" id="profile-sex"><strong>Sex:</strong> Male</div>
+          </div>
+          <div class="info-column">
+            <div class="info-item" id="profile-address"><strong>Address:</strong> Los Angeles California, USA</div>
+            <div class="info-item" id="profile-email"><strong>E-mail Address:</strong> lebooboo@gmail.com</div>
+          </div>
+        </div>
+      </div>
+      <button class="edit-button" onclick="openEditModal()">Edit Profile</button>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block section %}
+  <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editProfileForm">
+            <div class="mb-3">
+              <label for="editProfileImage" class="form-label">Profile Image</label>
+              <input type="file" class="form-control" id="editProfileImage" accept="image/*" onchange="previewImage(event)">
+            </div>
+            <div class="mb-3">
+              <label for="editName" class="form-label">Name</label>
+              <input type="text" class="form-control" id="editName" value="LeBron Raymone James">
+            </div>
+            <div class="mb-3">
+              <label for="editPosition" class="form-label">Position</label>
+              <input type="text" class="form-control" id="editPosition" value="Nurse">
+            </div>
+            <div class="mb-3">
+              <label for="editAge" class="form-label">Age</label>
+              <input type="number" class="form-control" id="editAge" value="39">
+            </div>
+            <div class="mb-3">
+              <label for="editContact" class="form-label">Contact Number</label>
+              <input type="text" class="form-control" id="editContact" value="09293456789">
+            </div>
+            <div class="mb-3">
+              <label for="editSex">Sex</label>
+              <select id="editSex" name="sex" class="form-control">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="editAddress" class="form-label">Address</label>
+              <input type="text" class="form-control" id="editAddress" value="Los Angeles California, USA">
+            </div>
+            <div class="mb-3">
+              <label for="editEmail" class="form-label">E-mail Address</label>
+              <input type="email" class="form-control" id="editEmail" value="lebooboo@gmail.com">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="saveProfile()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock section %}
+
+{% block js %}
+  <script>
+    function openEditModal() {
+      var modal = new bootstrap.Modal(document.getElementById('editProfileModal'));
+      modal.show();
+    }
+
+    function previewImage(event) {
+      var reader = new FileReader();
+      reader.onload = function() {
+        var output = document.getElementById('profileImage');
+        output.src = reader.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    function saveProfile() {
+      var name = document.getElementById('editName').value;
+      var position = document.getElementById('editPosition').value;
+      var age = document.getElementById('editAge').value;
+      var contact = document.getElementById('editContact').value;
+      var sex = document.getElementById('editSex').value;
+      var address = document.getElementById('editAddress').value;
+      var email = document.getElementById('editEmail').value;
+
+      document.getElementById('profile-name').innerText = name;
+      document.getElementById('profile-position').innerHTML = '<strong>Position:</strong> ' + position;
+      document.getElementById('profile-age').innerHTML = '<strong>Age:</strong> ' + age;
+      document.getElementById('profile-contact').innerHTML = '<strong>Contact Number:</strong> ' + contact;
+      document.getElementById('profile-sex').innerHTML = '<strong>Sex:</strong> ' + sex;
+      document.getElementById('profile-address').innerHTML = '<strong>Address:</strong> ' + address;
+      document.getElementById('profile-email').innerHTML = '<strong>E-mail Address:</strong> ' + email;
+
+      var modal = bootstrap.Modal.getInstance(document.getElementById('editProfileModal'));
+      modal.hide();
+    }
+  </script>
+{% endblock js %}

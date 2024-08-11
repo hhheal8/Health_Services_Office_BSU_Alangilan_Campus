@@ -1,0 +1,171 @@
+{% extends "admin_layout.html" %}
+{% load static %}
+
+{% block title %}
+  Admin Student History - Health Services Office | BSU Alangilan
+{% endblock title %}
+
+{% block content %}
+  <div class="content">
+    <div class="student-status-container">
+      <a href="student-app.html" class="btn student-status">Appointment</a>
+      <a href="student-records.html" class="btn student-status">Records</a>
+      <a href="student-history.html" class="btn student-status active">History</a>
+    </div>
+
+    <!-- Appointment Section -->
+    <div class="studentProfile-section">
+      <!-- User Profile -->
+      <div class="container">
+        <div class="profile">
+          <img id="profile-image" src="assets/img/sampleProfile.jpg" alt="User Avatar">
+          <h2 id="purpose">Pre-Enrollment Medical Examination <i class="fas fa-edit" onclick="openModal()"></i></h2>
+        </div>
+        <div class="profile-info">
+            <div class="form-row">
+          <div class="info-group">
+            <label>Last Name:</label>
+            <span id="lname">Monkey</span>
+          </div>
+
+          <div class="info-group">
+            <label>First Name:</label>
+            <span id="fname">Ahze Liam Kael</span>
+          </div>
+          <div class="info-group">
+            <label>Middle Name:</label>
+            <span id="mname">D.</span>
+          </div>
+            </div>
+            <div class="form-row">
+          <div class="info-group">
+            <label>Sex:</label>
+            <span id="sex">Male</span>
+          </div>
+          <div class="info-group">
+            <label>Age:</label>
+            <span id="age">21</span>
+          </div>
+          <div class="info-group">
+            <label>Birthdate:</label>
+            <span id="birthdate">02/21/2003</span>
+          </div>
+          <div class="info-group">
+            <label>Date:</label>
+            <span id="date">07/21/2024</span>
+          </div>
+
+            </div>
+            <div class="form-row">
+          <div class="info-group">
+            <label>Civil Status:</label>
+            <span id="civilstatus">Single</span>
+          </div>
+          <div class="info-group">
+            <label>Telephone Number:</label>
+            <span id="telephoneNumber">+123 1021 1021</span>
+          </div>
+          <div class="info-group">
+            <label>Contact Number:</label>
+            <span id="contactNumber">+123 1021 1021</span>
+          </div>
+            </div>
+            <div class="form-row">
+          <div class="info-group">
+            <label>Address:</label>
+            <span id="address">123 Sa Kanan St, Candelaria, Quezon</span>
+          </div>
+            </div>
+            <div class="form-row">
+          <div class="info-group">
+            <label>Position/Program/Status:</label>
+            <span id="position">none/BSCS/Single</span>
+          </div>
+          </div>
+          <button class="viewFile" id="file">View File</button>
+        </div>
+      </div>
+      <!-- End User Profile -->
+
+      <!-- Modal -->
+      <div id="editModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <h2>Edit Profile</h2>
+          <form id="editProfileForm">
+            <div class="edit-profile-info">
+              <div class="form-row">
+                <div class="info-group">
+                  <label for="editImage" class="pimageLabel">Profile Image:</label>
+                  <h8 id="fileName">No file chosen</h8>
+                  <input type="file" id="editImage" accept="image/*">
+                  <label for="editImage" class="custom-file-label"><i class="fas fa-upload"></i> Choose File</label>
+                </div>
+                <div class="info-group">
+                  <label for="editLname">Last Name:</label>
+                  <input type="text" id="editLname" value="Monkey">
+                </div>
+                <div class="info-group">
+                  <label for="editFname">First Name:</label>
+                  <input type="text" id="editFname" value="Ahze Liam Kael">
+                </div>
+                <div class="info-group">
+                  <label for="editMname">Middle Name:</label>
+                  <input type="text" id="editMname" value="D.">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="info-group">
+                  <label for="editAge">Age:</label>
+                  <input type="text" id="editAge" value="21">
+                </div>
+                <div class="info-group">
+                  <label for="editSex">Sex:</label>
+                  <input type="text" id="editSex" value="Male">
+                </div>
+                <div class="info-group">
+                  <label for="editBirthdate">Birthdate:</label>
+                  <input type="date" id="editBirthdate" value="02-21-2024">
+                </div>
+                <div class="info-group">
+                  <label for="editDate">Date:</label>
+                  <input type="date" id="editDate" value="02/21/2003">
+                </div>
+                <div class="info-group">
+                  <label for="editCivilStatus">Civil Status:</label>
+                  <input type="text" id="editCivilStatus" value="07/21/2-24">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="info-group">
+                  <label for="editTelephoneNumber">Telephone Number:</label>
+                  <input type="text" id="editTelephoneNumber" value="+123 1021 1021">
+                </div>
+                <div class="info-group">
+                  <label for="editContactNumber">Contact Number:</label>
+                  <input type="text" id="editContactNumber" value="+123 1021 1021">
+                </div>
+                <div class="info-group">
+                  <label for="editAddress">Address:</label>
+                  <input type="text" id="editAddress" value="123 Sa Kanan St, Candelaria, Quezon">
+                </div>
+                <div class="info-group">
+                  <label for="editPosition">Position/Program/Status:</label>
+                  <input type="text" id="editPosition" value="None/BSCS/Single">
+                </div>
+              </div>
+            </div>
+            <div class="save-btn">
+              <button type="button" class="btn btn-primary" onclick="saveProfile()">Save Changes</button>
+            </div>
+
+          </form>
+        
+          
+        </div>
+      </div>
+      <!-- End Modal -->
+    </div>
+    <!-- End studentProfile Section -->
+  </div>
+{% endblock content %}

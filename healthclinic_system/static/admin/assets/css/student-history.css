@@ -1,0 +1,166 @@
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .student-status-container {
+      margin-bottom: 20px;
+    }
+
+    .student-status {
+      background-color: #F1F1F1;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      margin-right: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .student-status.active {
+      background-color: #be2e2e;
+      color: white;
+    }
+
+    .history-section {
+      background-color: rgba(255, 255, 255, 0.822);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .history-table {
+      width: 100%;
+      margin-top: 20px;
+      flex: 1;
+      max-height: 420px; 
+      overflow-y: auto; 
+    }
+
+    .history-table table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0%;
+      background-color: #ffffff;
+    }
+
+    .history-table th,
+    .history-table td {
+      padding: 10px;
+      border: 1px solid #E0E0E0;
+      text-align: center;
+    }
+
+    .history-table th {
+      background-color: #be2e2e;
+      color: white;
+    }
+
+   
+    .edit-button {
+      color: green;
+      border: none;
+      background-color: #ffffff00;
+    }
+
+    .delete-button {
+      color: rgb(184, 43, 33);
+      border: none;
+      background-color: #ffffff00;
+    }
+
+    .view-button {
+      color: rgb(39, 39, 39);
+      border: none;
+      background-color: #ffffff00;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 100%;
+      max-width: 60%;
+      border-radius: 10px;
+      margin-top: 5%;
+      color: #be2e2e;
+    }
+    .modal-content h2{
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.modal-content label{
+  font-weight: 500;
+}
+
+.modal-content .info-group input{
+      border-left: #be2e2e;
+      border-right: #be2e2e;
+      border-top: #be2e2e;
+      border-color: #e4a620;
+    }
+
+    .close {
+      color: #aaa;
+      
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: rgb(221, 174, 21);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .save-btn {
+      text-align: center;
+      
+    }
+
+
+    .save-btn button{
+      padding: 10px;
+      background-color: #be2e2e;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      width: 15%;
+      margin-top:5%;
+
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .info-group {
+      flex: 1;
+      margin: 10px;
+    }
+  

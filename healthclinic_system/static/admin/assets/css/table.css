@@ -1,0 +1,80 @@
+.content{
+  margin-top: 20px;
+  margin-left: 250px;
+}
+.student-status-container {
+ margin-bottom: 5px;
+}
+.student-status {
+  height: 50px;
+  width: 120px;
+  margin-left: 4px;
+  padding-top: 10px;
+  border-radius: 5%;
+  color: #F12C2C;
+  border: 1px solid #F12C2C;
+  background-color: white; 
+}
+.student-status.active {
+  background-color: #F12C2C;
+  color: white;
+}
+.student-status:hover {
+  opacity: 0.8;
+  border: 1px solid #F12C2C;
+}
+
+
+
+
+/* Global Table */
+.table th,
+.table td {
+  text-align: center;
+}
+.table-container {
+  width: 1375px;
+  padding: 8px;
+  background: #FFFFFF;
+  border: 1px solid #FFFFFF00;
+}
+.table-scontainer{
+  margin-left: 20px;
+}
+.table-name{
+  font-size: 40px;
+  font-weight: 700;
+  color: #F12C2C;
+  margin-top: 20px;
+
+}
+.table-row{
+  font-size: 20px;
+}
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.page-item{
+  color: #F12C2C;
+}
+.page-link {
+  margin: 0 5px;
+  cursor: pointer;
+}
+.page-link.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.edit-button, .delete-button, .view-button{
+  border: none;
+  background-color: #F12C2C;
+  padding: 3px 8px;
+  border-radius: 10%;
+  color: #FFFFFF;
+}
+.edit-button:hover, .delete-button:hover, .view-button:hover{
+  opacity: 0.8;
+}

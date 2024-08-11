@@ -1,0 +1,367 @@
+{% extends "admin_layout.html" %}
+{% load static %}
+
+{% block title %}
+  Admin Student Records - Health Services Office | BSU Alangillan
+{% endblock title %}
+
+{% block style %}
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .student-status-container {
+      margin-bottom: 20px;
+    }
+
+    .student-status {
+      background-color: #F1F1F1;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      margin-right: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .student-status.active {
+      background-color: #be2e2e;
+      color: white;
+    }
+
+    .records-section {
+      background-color: rgba(255, 255, 255, 0.822);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .records-table {
+      width: 100%;
+      margin-top: 20px;
+      flex: 1;
+      max-height: 420px; /* Set a fixed height for the table container */
+      overflow-y: auto; /* Enable vertical scrolling */
+    }
+
+    .records-table table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0%;
+      background-color: #ffffff;
+    }
+
+    .records-table th,
+    .records-table td {
+      padding: 10px;
+      border: 1px solid #E0E0E0;
+      text-align: center;
+    }
+
+    .records-table th {
+      background-color: #be2e2e;
+      color: white;
+    }
+
+    .actions .fas {
+      border: none;
+    }
+
+    .actions .edit-button {
+      color: green;
+      border: none;
+      background-color: #ffffff00;
+    }
+
+    .actions .delete-button {
+      color: rgb(184, 43, 33);
+      border: none;
+      background-color: #ffffff00;
+    }
+
+    .actions .view-button {
+      color: rgb(39, 39, 39);
+      border: none;
+      background-color: #ffffff00;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 100%;
+      max-width: 60%;
+      border-radius: 10px;
+      margin-top: 5%;
+      color: #be2e2e;
+    }
+    .modal-content h2{
+      text-align: center;
+      margin-bottom: 5%;
+    }
+
+    .modal-content label{
+      font-weight: 500;
+    }
+
+    .modal-content input{
+      border-left: #be2e2e;
+      border-right: #be2e2e;
+      border-top: #be2e2e;
+      border-color: #e4a620;
+    }
+
+    .close {
+      color: #aaa;
+      
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: rgb(221, 174, 21);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .modal-content button {
+      text-align: center;
+      justify-self: center;
+      
+    }
+
+    .modal-content button {
+      padding: 10px;
+      background-color: #be2e2e;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      width: 15%;
+      margin-top: 5%;
+      margin-left: 41%;
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .info-group {
+      flex: 1;
+      margin: 10px;
+    }
+  </style>
+{% endblock style %}
+
+{% block content %}
+  <div class="content">
+
+    <div class="student-status-container">
+      <a href="student-app.html" class="btn student-status">Appointment</a>
+      <a href="student-records.html" class="btn student-status active">Records</a>
+      <a href="student-history.html" class="btn student-status">History</a>
+    </div>
+
+    <!-- Appointment Section -->
+    <div class="records-section">
+      <div class="records-table">
+        <table class="table table-striped">
+          <thead>
+            <tr class="table-row">
+              <th>Student ID</th>
+              <th>Name</th>
+              <th>Sex</th>
+              <th>Year</th>
+              <th>Department</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="employeeTableBody">
+            <!-- Sample row -->
+            <tr>
+              <td>A21-0089</td>
+              <td>Ahze Liam</td>
+              <td>Male</td>
+              <td>3</td>
+              <td>Computer Science</td>
+              <td class="actions">
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <a class="view-button" href="student-record-sampleProfile.html"><i class="fas fa-eye"></i></a>
+              </td>
+            </tr>
+            <tr>
+              <td>A22-0423</td>
+              <td>Seki Cat</td>
+              <td>Female</td>
+              <td>2</td>
+              <td>Nursing</td>
+              <td class="actions">
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>A23-0212</td>
+              <td>Kisses Minches</td>
+              <td>Female</td>
+              <td>1</td>
+              <td>HRM</td>
+              <td class="actions">
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>A21-0198</td>
+              <td>Kyla Pot</td>
+              <td>Female</td>
+              <td>3</td>
+              <td>Computer Science</td>
+              <td class="actions">
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>A23-0093</td>
+              <td>Thomas Shelby</td>
+              <td>Male</td>
+              <td>1</td>
+              <td>Information Technology</td>
+              <td class="actions">
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>A22-0423</td>
+              <td>Seki Cat</td>
+              <td>Female</td>
+              <td>2</td>
+              <td>Nursing</td>
+              <td class="actions">
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>A23-0212</td>
+              <td>Kisses Minches</td>
+              <td>Female</td>
+              <td>1</td>
+              <td>HRM</td>
+              <td class="actions">
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>A21-0198</td>
+              <td>Kyla Pot</td>
+              <td>Female</td>
+              <td>3</td>
+              <td>Computer Science</td>
+              <td class="actions">
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>A23-0093</td>
+              <td>Thomas Shelby</td>
+              <td>Male</td>
+              <td>1</td>
+              <td>Information Technology</td>
+              <td class="actions">
+                <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
+                <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                <button class="view-button"><i class="fas fa-eye"></i></button>
+              </td>
+            </tr>
+            <!-- More rows as needed -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- End Appointment Section -->
+
+  </div>
+{% endblock content %}
+
+{% block section %}
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeEditModal()">&times;</span>
+      <h2>Edit Student</h2>
+      <form id="editForm">
+        <div class="form-row">
+        <div class="info-group">
+          <label for="editStudentId" class="form-label">Student ID</label>
+          <input type="text" class="form-control" id="editStudentId" readonly>
+        </div>
+        <div class="info-group">
+          <label for="editName" class="form-label">Name</label>
+          <input type="text" class="form-control" id="editName" required>
+        </div>
+      
+      
+        <div class="info-group">
+          <label for="editSex" class="form-label">Sex</label>
+          <select class="form-control" id="editSex" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+
+      </div>
+  
+
+        <div class="form-row">
+        <div class="info-group">
+          <label for="editYear" class="form-label">Year</label>
+          <input type="number" class="form-control" id="editYear" required>
+        </div>
+        <div class="info-group">
+          <label for="editDepartment" class="form-label">Department</label>
+          <input type="text" class="form-control" id="editDepartment" required>
+        </div>
+
+      </div>
+        <button type="button" class="btn btn-primary" onclick="saveChanges()">Save changes</button>
+      </form>
+    </div>
+  </div>
+{% endblock section %}

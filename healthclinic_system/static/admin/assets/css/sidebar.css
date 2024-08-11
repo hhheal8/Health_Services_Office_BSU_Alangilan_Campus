@@ -1,0 +1,73 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 134px; /* Adjust to accommodate header and yellow line */
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  margin-left: 250px; /* Adjust to match sidebar width */
+  overflow-y: auto; /* Enable scrolling for content */
+}
+.sidebar {
+  width: 250px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg,#be2e2e 0%, rgb(105, 0, 15) 100%);
+  color: white;
+  padding: 20px;
+  position: fixed;
+  top: 134px; /* Adjust to align with bottom of yellow line */
+  left: 0;
+  bottom: 0;
+  overflow-y: auto; /* Enable scrolling for sidebar */
+}
+.sidebar-title {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  text-align: left; /* Align sidebar title to the left */
+}
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar-menu li {
+  margin-bottom: 15px; /* Reduced margin for better alignment */
+  text-align: left; /* Align sidebar menu items to the left */
+}
+.sidebar-menu li a, .dropdown-btn {
+  color: #8d8d8d; /* Darker color for text */
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px; /* Added padding for better alignment */
+  border-radius: 5px; /* Optional: to give rounded corners to the shade */
+  position: relative; /* Added for active indicator */
+  cursor: pointer;
+}
+.sidebar-menu li a .icon {
+  margin-right: 10px;
+  font-size: 1.2em;
+  color: #8d8d8d; /* Darker color for icons */
+}
+.sidebar-menu li a:hover, .sidebar-menu li a.active {
+   /* Rectangle shade color */
+  text-decoration: none; /* Remove underline on hover */
+  color: white; /* Change text color on hover */
+}
+.sidebar-menu li a:hover .icon, .sidebar-menu li a.active .icon{
+  color: white; /* Change icon color on hover */
+}
+
+.arrow {
+  margin-left: auto; /* Align chevron icon to the right */
+  transition: transform 0.3s ease;
+}
+.arrow.down {
+  transform: rotate(90deg);
+}
+.active {
+  color: white; 
+  border-left: 5px solid white; 
+}
