@@ -14,6 +14,6 @@ urlpatterns = [
   path("admin/student_app", views.admin_student_app, name="admin_student_app"),
   path("admin/student_history_profile", views.admin_student_history_profile, name="admin_student_history_profile"),
   path("admin/student_history", views.admin_student_history, name="admin_student_history"),
-  path("admin/student_record_profile", views.admin_student_record_profile, name="student_record_profile"),
+  path("admin/student_record_profile", views.admin_student_record_profile, name="admin_student_record_profile"),
   path("admin/student_records", views.admin_student_records, name="admin_student_records")
 ]

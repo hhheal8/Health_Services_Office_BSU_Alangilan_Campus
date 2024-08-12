@@ -1,4 +1,4 @@
-{% extends "admin_layout.html" %}
+{% extends "layout/admin_layout.html" %}
 {% load static %}
 
 {% block title %}
@@ -8,9 +8,9 @@
 {% block content %}
   <div class="content">
     <div class="student-status-container">
-      <a href="student-app.html" class="btn student-status">Appointment</a>
-      <a href="student-records.html" class="btn student-status">Records</a>
-      <a href="student-history.html" class="btn student-status active">History</a>
+      <a href="{% url 'users:admin_student_app' %}" class="btn student-status">Appointment</a>
+      <a href="{% url 'users:admin_student_records' %}" class="btn student-status">Records</a>
+      <a href="{% url 'users:admin_student_history' %}" class="btn student-status active">History</a>
     </div>
 
     <!-- Appointment Section -->
@@ -18,7 +18,7 @@
       <!-- User Profile -->
       <div class="container">
         <div class="profile">
-          <img id="profile-image" src="assets/img/sampleProfile.jpg" alt="User Avatar">
+          <img id="profile-image" src="{% static 'admin/assets/img/sampleProfile.jpg' %}" alt="User Avatar">
           <h2 id="purpose">Pre-Enrollment Medical Examination <i class="fas fa-edit" onclick="openModal()"></i></h2>
         </div>
         <div class="profile-info">

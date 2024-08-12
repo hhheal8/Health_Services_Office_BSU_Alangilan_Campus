@@ -10,7 +10,6 @@ def admin_registration(request):
       # return redirect('users:user_login') 
   else:
     form = UserCreationForm()
-  
   # return render(request, 'users/admin_registration.html', { 'form': form })
 
 def student_registration(request):
@@ -21,7 +20,6 @@ def student_registration(request):
       # return redirect('users:user_login') 
   else:
     form = UserCreationForm()
-  
   # return render(request, 'users/student_registration.html', { 'form': form })
 
 def user_login(request):

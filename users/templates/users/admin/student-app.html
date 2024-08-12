@@ -1,4 +1,4 @@
-{% extends "admin_layout.html" %}
+{% extends "layout/admin_layout.html" %}
 {% load static %}
 
 {% block title %}
@@ -9,9 +9,9 @@
   <div class="content">
 
     <div class="student-status-container">
-      <a href="student-app.html" class="btn student-status active">Appointment</a>
-      <a href="student-records.html" class="btn student-status">Records</a>
-      <a href="student-history.html" class="btn student-status">History</a>
+      <a href="{% url 'users:admin_student_app' %}" class="btn student-status active">Appointment</a>
+      <a href="{% url 'users:admin_student_records' %}" class="btn student-status">Records</a>
+      <a href="{% url 'users:admin_student_history' %}" class="btn student-status">History</a>
     </div>
 
     <!-- Appointment Section -->

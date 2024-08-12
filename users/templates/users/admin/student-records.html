@@ -1,4 +1,4 @@
-{% extends "admin_layout.html" %}
+{% extends "layout/admin_layout.html" %}
 {% load static %}
 
 {% block title %}
@@ -181,9 +181,9 @@
   <div class="content">
 
     <div class="student-status-container">
-      <a href="student-app.html" class="btn student-status">Appointment</a>
-      <a href="student-records.html" class="btn student-status active">Records</a>
-      <a href="student-history.html" class="btn student-status">History</a>
+      <a href="{% url 'users:admin_student_app' %}" class="btn student-status">Appointment</a>
+      <a href="{% url 'users:admin_student_records' %}" class="btn student-status">Records</a>
+      <a href="{% url 'users:admin_student_history' %}" class="btn student-status active">History</a>
     </div>
 
     <!-- Appointment Section -->
@@ -211,7 +211,7 @@
               <td class="actions">
                 <button class="edit-button" onclick="openEditModal(this)"><i class="fas fa-pen"></i></button>
                 <button class="delete-button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                <a class="view-button" href="student-record-sampleProfile.html"><i class="fas fa-eye"></i></a>
+                <a class="view-button" href="{% url 'users:admin_student_record_profile' %}"><i class="fas fa-eye"></i></a>
               </td>
             </tr>
             <tr>

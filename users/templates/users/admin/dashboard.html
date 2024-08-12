@@ -1,4 +1,4 @@
-{% extends "admin_layout.html" %}
+{% extends "layout/admin_layout.html" %}
 {% load static %}
 
 {% block title %}
@@ -6,5 +6,124 @@
 {% endblock title %}
 
 {% block content %}
-  
+  <div class="content">
+    <!-- Container for Rectangle and Squares -->
+    <div style="display: flex; flex-wrap: wrap;">
+
+      <div class="profile-dashboard">
+        <div class="profile-header">
+          <img src="{% static 'admin/assets/img/image.png' %}" alt="Profile Image" class="profile-image">
+          <div class="profile-info">
+            <div class="greeting">Welcome,</div>
+            <div><span class="name">Nurse James</span></div>
+            <div class="profile-button">
+              <a href="{% url 'users:admin_profile' %}" class="btn btn-primary edit-button">
+                <i class="fas fa-pencil-alt"></i> Edit Profile
+              </a>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+      
+      
+      <div class="student-details">
+        <h3>Total Students</h3>
+      
+        <!-- Content for total students -->
+      </div>
+
+      <div class="demo-1">
+        <h1>Number of Appointments Monthly</h1>
+        <canvas id="appointmentsChart" style="width: 1300px; height: 400px;"></canvas> 
+      </div>
+
+      <div class="demo-2">
+        <h1>Student Structure</h1>
+        <div class="chart-container">
+          <canvas id="studentChart"></canvas>
+        </div>
+      </div>          
+
+      <div class="demo-3">
+        <h1>Common Illness</h1>
+        <div class="form-group">
+          <h5><label for="commonIllnessMonthSelector">Select Month:</label></h5>
+          <select id="commonIllnessMonthSelector" class="form-control" onchange="updateCommonIllnessChart()">
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+          </select>
+        </div>
+        <div class="chart-container">
+          <canvas id="CommonIllnnessChart"></canvas>
+        </div>
+      </div>
+
+      <div class="demo-4">
+        <h1>Medicine/Supply Stock</h1>
+        <div class="chart-container">
+          <canvas id="stockChart" style="width: 1300px; height: 200px;"></canvas>
+        </div>
+      </div>
+
+      <div class="demo-5">
+        <h1>Consumed Medicines This Month</h1>
+        <div class="form-group">
+          <h5><label for="consumedMedicineMonthSelector">Select Month:</label></h5>
+          <select id="consumedMedicineMonthSelector" class="form-control" onchange="updateConsumedMedicineChart()">
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+          </select>
+        </div>
+        <div class="chart-container">
+          <canvas id="consumedMedicineChart"></canvas>
+        </div>
+      </div>
+
+      <div class="demo-6">
+        <h1>Used Supplies This Month</h1>
+        <div class="form-group">
+          <h5><label for="usedSupplyMonthSelector">Select Month:</label></h5>
+          <select id="usedSupplyMonthSelector" class="form-control" onchange="updateUsedSupplyChart()">
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+          </select>
+        </div>
+        <div class="chart-container">
+          <canvas id="usedSupplyChart"></canvas>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 {% endblock content %}
