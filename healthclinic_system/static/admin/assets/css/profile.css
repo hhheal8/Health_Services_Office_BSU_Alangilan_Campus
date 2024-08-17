@@ -1,83 +1,150 @@
-.main-container {
-  display: flex;
-  justify-content: center;  /* Horizontal centering */
-  align-items: center;      /* Vertical centering */
-  height: 100vh;            /* Full viewport height */
+/* General Styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.profile-container {
-  position: relative; /* Added for positioning */
-  width: 1300px;
-  height: 700px;
-  padding: 8px;
-  background: #FFFF;
-  border-radius: 16px;
-  margin-bottom: 20px; /* Adjust margin as needed */
-  margin-left: 10px;
-  margin-top: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.443); /* Add shadow */
-  display: flex;
-  flex-direction: column;
+/* Container settings */
+.container-fluid {
   padding: 20px;
+}
+
+/* Header Styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-title h2 {
+  margin-left: 10px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #333;
+  color: #fff;
+  padding: 15px;
+  min-height: 100vh;
+  position: fixed;
+  width: 200px;
+}
+
+.sidebar-title {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.sidebar-menu li {
+  margin-bottom: 15px;
+}
+
+/* Content Area */
+.content {
+  margin-left: 220px;
+  padding: 20px;
+}
+
+/* Profile Container */
+.profile-container {
+  padding: 20px;
+  background-color: #f9f9f9ad;
+  border-radius: 8px;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .profile-details {
   display: flex;
   align-items: center;
-  margin-top: 20px;
   margin-bottom: 20px;
-  margin-left: 40px;
-  padding-bottom: 10px;
+  flex-wrap: wrap;
 }
 
-.profile-image {
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 20px;
+
+.profile-info {
+  
+  flex-grow: 1;
 }
+
+
+
+
 
 .profile-image img {
-  width: 100%;
-  height: 100%;
+  width: 70%;
+  height: 70%;
   object-fit: cover;
+  border-radius: 50%;
+  margin-left: 25px;
+  margin-top: 13%;
 }
 
 .profile-info .name {
-  font-size: 3.5rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 8px;
-  margin-top: 10px;
+ 
+  margin-top: -5%;
+  
   color: maroon;
 }
 
 .profile-info .info-item {
-  font-size: 2rem;
-  margin-bottom: 0px;
+  font-size: 1rem; 
+  
+}
+
+ .edit-button {
+  
+  position: absolute;
+  background-color:#a62e2e;
+  color: white;
+  border: none;
+  padding: 8px 16px; 
+  border-radius: 8px;
+  font-size: 0.9rem; 
+  cursor: pointer;
+  
+  
+
+  
 }
 
 .separator {
-  width: 95%;
+  width: 100%;
   height: 2px;
-  background-color: #ddd;
-  margin-left: 25px;
+  background-color: #8a2525;
+ 
+   
+  margin-top: -2rem;
 }
 
 .other-info {
-  margin-left: 100px;
+  margin-left: 50px; 
   margin-top: 20px;
-  font-size: 1rem;
+  font-size: 0.9rem; 
 }
 
 .other-info h3 {
-  font-size: 2.5rem;
+  font-size: 1.2rem; 
   font-weight: bold;
   margin-bottom: 20px;
 }
 
 .other-info .info-item {
-  font-size: 1.5rem;
+  font-size: 1rem; 
 }
 
 .info-row {
@@ -87,21 +154,10 @@
 
 .info-column {
   flex: 1;
-  min-width: 300px; /* Adjust as needed */
+  min-width: 250px; 
 }
 
-.edit-button {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  background-color: #F12C2C;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-}
+
 
 .edit-button:hover {
   background-color: #a62e2e;
@@ -116,8 +172,9 @@
 }
 
 .modal-header {
-  background-color: #f8f9fa;
+  background-color:  #ce2626;
   border-bottom: 1px solid #e9ecef;
+  color: #fff;
 }
 
 .modal-footer {
@@ -143,3 +200,182 @@
   background-color: #a62e2e;
   border-color: #a62e2e;
 }
+
+
+
+@media (max-width: 1200px) {
+  .content {
+      margin-left: 180px; 
+  }
+
+  .sidebar {
+      width: 180px; 
+  }
+
+  .profile-image img {
+      width: 80px;
+      height: 80px;
+  }
+
+  .profile-info .name {
+      font-size: 1.3em;
+  }
+
+  .info-item {
+      font-size: 1em;
+  }
+}
+
+@media (max-width: 992px) {
+  .content {
+      margin-left: 150px;
+  }
+
+  .sidebar {
+      width: 150px;
+  }
+
+  .profile-info .name {
+      font-size: 1.2em;
+  }
+
+  .info-item {
+      font-size: 0.95em;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+      margin-left: 120px;
+  }
+
+  .sidebar {
+      width: 120px;
+  }
+
+  .profile-details {
+      flex-direction: column; 
+      text-align: center;
+  }
+
+  .profile-image img {
+      width: 70px;
+      height: 70px;
+  }
+
+  .profile-info {
+      margin-left: 0;
+      margin-top: 10px;
+  }
+
+  .profile-info .name {
+      font-size: 1.1em;
+  }
+
+  .info-item {
+      font-size: 0.9em;
+  }
+}
+
+@media (max-width: 576px) {
+  .sidebar {
+      width: 100%; 
+      height: auto;
+      position: relative;
+  }
+
+  .content {
+      margin-left: 0; 
+      padding-top: 20px;
+  }
+
+  .profile-container {
+      padding: 10px;
+  }
+
+  .profile-image img {
+      width: 60px;
+      height: 60px;
+  }
+
+  .profile-info .name {
+      font-size: 1em;
+  }
+
+  .info-item {
+      font-size: 0.85em;
+  }
+
+  .edit-button {
+      font-size: 0.85em;
+      padding: 8px 12px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .content {
+      margin-left: 120px; 
+  }
+
+  .sidebar {
+      width: 120px;
+  }
+
+  .profile-details {
+      flex-direction: column;
+      text-align: center;
+  }
+}
+
+
+@media (max-width: 576px) {
+  .sidebar {
+      width: 100%; 
+      position: relative;
+      min-height: auto; 
+  }
+
+  .content {
+      margin-left: 0; 
+      padding-top: 20px;
+  }
+
+  .profile-container {
+      padding: 10px;
+  }
+
+  .profile-image img {
+      width: 60px;
+      height: 60px;
+  }
+
+  .profile-info .name {
+      font-size: 1em;
+  }
+
+  .info-item {
+      font-size: 0.85em;
+  }
+
+  .edit-button {
+      font-size: 0.85em;
+      padding: 8px 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .sidebar {
+      display: none; 
+  }
+
+  .content {
+      margin-left: 0;
+      padding: 10px;
+  }
+
+  .sidebar-toggle {
+      display: block; 
+  }
+}
+

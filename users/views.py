@@ -1,16 +1,20 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, logout
+from . import forms
+
+# def admin_registration(request):
+#   if request.method == 'POST':
+#     form = UserCreationForm(request.POST)
+#     if form.is_valid():
+#       login(request, form.save())
+#       # return redirect('users:user_login') 
+#   else:
+#     form = UserCreationForm()
+#   # return render(request, 'users/admin_registration.html', { 'form': form })
 
 def admin_registration(request):
-  if request.method == 'POST':
-    form = UserCreationForm(request.POST)
-    if form.is_valid():
-      login(request, form.save())
-      # return redirect('users:user_login') 
-  else:
-    form = UserCreationForm()
-  # return render(request, 'users/admin_registration.html', { 'form': form })
+  return render(request, 'users/admin_registration.html')
 
 def student_registration(request):
   if request.method == 'POST':
