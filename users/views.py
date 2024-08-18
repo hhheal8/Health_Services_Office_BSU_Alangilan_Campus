@@ -1,45 +1,19 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from . import forms
-
-# def admin_registration(request):
-#   if request.method == 'POST':
-#     form = UserCreationForm(request.POST)
-#     if form.is_valid():
-#       login(request, form.save())
-#       # return redirect('users:user_login') 
-#   else:
-#     form = UserCreationForm()
-#   # return render(request, 'users/admin_registration.html', { 'form': form })
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.conf import settings
+from django.core.mail import EmailMessage
+from django.utils import timezone
+from django.urls import reverse
+from .models import *
 
 def admin_registration(request):
-  return render(request, 'users/admin_registration.html')
-
-def student_registration(request):
-  if request.method == 'POST':
-    form = UserCreationForm(request.POST)
-    if form.is_valid():
-      login(request, form.save())
-      # return redirect('users:user_login') 
-  else:
-    form = UserCreationForm()
-  # return render(request, 'users/student_registration.html', { 'form': form })
+  return render(request, "users/admin_registration_1.html")
 
 def user_login(request):
-  if request.method == 'POST':
-    form = AuthenticationForm(data=request.POST)
-    if form.is_valid():
-      login(request, form.get_user())
-      # return redirect("posts:list")
-  else:
-    form = AuthenticationForm()
-  # return render(request, 'users/login.html', { 'form': form })
-
-def user_logout(request):
-  if request.method == "POST":
-    logout(request)
-    # return redirect("homepage")
+  return render(request, "users/login.html")
 
 def admin_dashboard(request):
   return render(request, "users/admin/dashboard.html")

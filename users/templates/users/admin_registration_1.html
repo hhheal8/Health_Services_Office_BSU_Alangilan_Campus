@@ -1,0 +1,34 @@
+{% extends "main_layout.html" %}
+{% load static %}
+
+{% block title %}
+  Signup - Health Services Office | BSU Alangilan
+{% endblock title %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'assets/css/signup.css' %}">
+{% endblock css %}
+
+{% block content %}
+  <div class="register-container">
+    <div class="register-header">
+      <img src="{% static 'assets/img/logo.png' %}" alt="Health Service Office Logo" class="login-logo">
+      <h2>Admin Registration</h2>
+    </div>
+    <form id="signupForm" method="post">
+      {% csrf_token %}
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Username" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+      </div>
+      <div class="form-footer">
+        <button type="submit" class="btn">Register</button>
+      </div>
+      <div id="error" class="error"></div>
+    </form>
+  </div>
+{% endblock content %}

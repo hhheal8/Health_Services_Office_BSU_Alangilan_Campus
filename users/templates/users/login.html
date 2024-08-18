@@ -1,0 +1,41 @@
+{% extends "main_layout.html" %}
+{% load static %}
+
+{% block title %}
+  Signup - Health Services Office | BSU Alangilan
+{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <div class="login-container">
+        <div class="header">
+            <img src="{% static 'assets/img/logo.png' %}" alt="EUC HRIMS Logo" class="login-logo">
+            <div>
+                <h2>Health Services Office</h2>
+                <h2>Alangilan Campus</h2>
+            </div>
+        </div>
+        <form id="loginForm">
+            <div class="role-group">
+                <button type="button" class="role-btn active" data-role="admin">Admin</button>
+                <button type="button" class="role-btn" data-role="student">Student</button>
+            </div>
+            <input type="hidden" id="role" name="role" value="admin">
+            <div class="input-group">
+                <input type="text" id="username" name="username" placeholder="ID" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div style="text-align: right;">
+                <button type="submit" class="btn">Login</button>
+            </div>
+            <div id="error" class="error"></div>
+        </form>
+    </div>
+  <script src="{% static 'assets/js/login.js' %}"></script>
+{% endblock content %}
+  
