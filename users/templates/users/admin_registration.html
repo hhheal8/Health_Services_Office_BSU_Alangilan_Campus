@@ -16,20 +16,32 @@ Admin Registration - Health Services Office | BSU Alangilan
             <img src="{% static 'assets/img/logo.png' %}" alt="Health Service Office Logo" class="login-logo">
             <h2>Health Service Office Alangilan Campus</h2>
         </div>
-        <form id="registerForm">
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if messages.tags == 'error' %}
+                    <center><h4 style="color: firebrick;">{{message}}</h4></center>
+                {% else %}
+                    <center><h4 style="color: dodgerblue;">{{message}}</h4></center>
+                {% endif %} 
+            {% endfor %}
+        {% endif %}
+
+        <form id="registerForm" method="POST" action="{% url 'users:admin_registration' %}">
+            {% csrf_token %}
             <h2>Admin Registration</h2>
             <div class="input-group">
                 <div>
-                    <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="lastName" name="last_name" placeholder="Last Name" required>
                 </div>
                 <div>
-                    <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="firstName" name="first_name" placeholder="First Name" required>
                 </div> 
                 <div>
-                    <label for="middleName">Middle Name</label>
-                    <input type="text" id="middleName" name="middleName" placeholder="Middle Name" required>
+                    <label for="middle_name">Middle Name</label>
+                    <input type="text" id="middleName" name="middle_name" placeholder="Middle Name" required>
                 </div> 
                 <div>
                     <label for="suffix">Suffix</label>
@@ -60,12 +72,12 @@ Admin Registration - Health Services Office | BSU Alangilan
             </div>
             <div class="input-group">
                 <div>
-                    <label for="contactNumber">Contact Number</label>
-                    <input type="text" id="contactNumber" name="contactNumber" placeholder="Contact Number" required>
+                    <label for="contact_number">Contact Number</label>
+                    <input type="text" id="contactNumber" name="contact_number" placeholder="Contact Number" required>
                 </div>
                 <div>
-                    <label for="telephoneNumber">Telephone Number</label>
-                    <input type="text" id="telephoneNumber" name="telephoneNumber" placeholder="Telephone Number" required>
+                    <label for="telephone_number">Telephone Number</label>
+                    <input type="text" id="telephoneNumber" name="telephone_number" placeholder="Telephone Number" required>
                 </div>
                 <div>
                     <label for="email">Email</label>
@@ -75,19 +87,19 @@ Admin Registration - Health Services Office | BSU Alangilan
                     <label for="profileImage">Profile Image</label>
                 <div class="custom-file-input">
                     
-                    <input type="file" id="profileImage" name="profileImage" accept="image/*" required>
-                    <label for="profileImage"><i class="fas fa-upload"></i> Choose File</label>
+                    <input type="file" id="profileImage" name="profile_image" accept="image/*" required>
+                    <label for="profile_image"><i class="fas fa-upload"></i> Choose File</label>
                 </div>
             </div>
             </div>
             <div class="input-group">
                 <div>
-                    <label for="presentAddress">Present Address</label>
-                    <input type="text" id="presentAddress" name="presentAddress" placeholder="Present Address" required>
+                    <label for="present_address">Present Address</label>
+                    <input type="text" id="presentAddress" name="present_address" placeholder="Present Address" required>
                 </div>
                 <div>
-                    <label for="homeAddress">Home Address</label>
-                    <input type="text" id="homeAddress" name="homeAddress" placeholder="Home Address" required>
+                    <label for="home_address">Home Address</label>
+                    <input type="text" id="homeAddress" name="home_address" placeholder="Home Address" required>
                 </div>
             </div>
             <div class="form-footer">

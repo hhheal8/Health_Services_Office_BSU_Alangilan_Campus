@@ -7,10 +7,25 @@ from django.conf import settings
 from django.core.mail import EmailMessage
 from django.utils import timezone
 from django.urls import reverse
-from .models import *
+from .models import AdminProfile
 
 def admin_registration(request):
-  return render(request, "users/admin_registration_1.html")
+  if request.method == "POST":
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+
+    if User.objects.filter(username=username).exists():
+      messages.error(request, "Username already exists.")
+      return redirect("users:admin_registration")
+    else:
+      new_user = User.objects.create_user(
+        username=username,
+        password=password
+      )
+      messages.success(request, "Username created successfully. Proceed to complete the registration.")
+      return redirect("users:user_login")
+  
+  return render(request, "users/admin_registration.html")
 
 def user_login(request):
   return render(request, "users/login.html")
