@@ -35,7 +35,7 @@ body::before {
   max-height: 90vh;
   position: relative;
   z-index: 2;
-  overflow: auto;
+  overflow: scroll;
 
 }
 
