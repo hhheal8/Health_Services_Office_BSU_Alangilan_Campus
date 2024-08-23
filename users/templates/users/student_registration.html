@@ -68,12 +68,18 @@
             </div>
             <div class="input-group">
                 <div>
-                    <label for="birthdate">Birth Date</label>
-                    <input type="text" id="birthdate" name="birthdate" placeholder="Birth Date">
+                    <label for="birth_date">Birth Date</label>
+                    <input type="date" id="birthdate" name="birth_date" placeholder="Birth Date">
+                    <div id="error" class="error">
+                        {{ form.birth_date.errors }}
+                    </div>
                 </div>
                 <div>
-                    <label for="srcode">SR-Code</label>
-                    <input type="text" id="srcode" name="srcode" placeholder="SR-Code">
+                    <label for="sr_code">SR-Code</label>
+                    <input type="text" id="srcode" name="sr_code" placeholder="SR-Code">
+                    <div id="error" class="error">
+                        {{ form.sr_code.errors }}
+                    </div>
                 </div>
                 <div>
                     <label for="age">Age</label>
@@ -110,12 +116,18 @@
                     </div>
                 </div>
                 <div>
-                    <label for="civilStatus">Civil Status</label>
-                    <input type="text" id="civilStatus" name="civilStatus" placeholder="Civil Status" required>
+                    <label for="civil_status">Civil Status</label>
+                    <input type="text" id="civilStatus" name="civil_status" placeholder="Civil Status" required>
+                    <div id="error" class="error">
+                        {{ form.civil_status.errors }}
+                    </div>
                 </div>
                 <div>
                     <label for="gsuite">Gsuite</label>
                     <input type="text" id="gsuite" name="gsuite" placeholder="Gsuite" required>
+                    <div id="error" class="error">
+                        {{ form.gsuite.errors }}
+                    </div>
                 </div>
             </div>
             <div class="input-group">

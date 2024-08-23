@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login
 from django.contrib import messages
-from .models import UserAdmin
-from .forms import UserAdminRegistration
+from .models import UserAdmin, UserStudent
+from .forms import UserAdminRegistration, UserStudentRegistration
 
 def admin_registration(request):
   if request.method == "POST":
@@ -15,7 +15,7 @@ def admin_registration(request):
       user.save()
       messages.success(request, "Admin Registration Succesful! You Can Now Log In.")
       login(request, user)
-      return redirect("users:admin_dashboard")
+      return redirect("users:user_login")
     else:
       messages.error(request, "Invalid Input! Please Try Again.")
   else:
@@ -23,8 +23,23 @@ def admin_registration(request):
       
   return render(request, "users/admin_registration.html", {"form": form})
 
-def student_registration(request): 
-  return render(request, "users/student_registration.html")
+def student_registration(request):
+  if request.method == "POST":
+    form = UserStudentRegistration(request.POST, request.FILES)
+    if form.is_valid():
+      user = form.save(commit=False)
+      user.set_password(form.cleaned_data["password"])
+      user.is_staff = False  
+      user.save()
+      messages.success(request, "Student Registration Successful!")
+      login(request, user)
+      return redirect("users:user_login")
+    else:
+      messages.error(request, "Invalid Input! Please Try Again.")
+  else:
+    form = UserStudentRegistration()
+      
+  return render(request, "users/student_registration.html", {"form": form})
 
 def user_login(request):
   return render(request, "users/login.html")

@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserAdmin
+from .models import UserAdmin, UserStudent
 
 class UserAdminRegistration(forms.ModelForm):
   password = forms.CharField(widget=forms.PasswordInput)
@@ -18,4 +18,20 @@ class UserAdminRegistration(forms.ModelForm):
       "sex": forms.Select(choices=UserAdmin.SEX_CHOICES)
     }
 
-  
+class UserStudentRegistration(forms.ModelForm):
+  password = forms.CharField(widget=forms.PasswordInput)
+
+  class Meta:
+    model = UserStudent
+
+    fields = [
+      "middle_name", "suffix", "birth_date", "sr_code", "age", 
+      "sex", "contact_number", "telephone_number", "civil_status", "gsuite", 
+      "present_address", "home_address", "profile_image"
+    ]
+
+    widgets = {
+      "sex": forms.Select(choices=UserStudent.SEX_CHOICES),
+      "birth_date": forms.DateInput(attrs={"type": "date"})
+    }
+

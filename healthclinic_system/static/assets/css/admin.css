@@ -35,8 +35,7 @@ body::before {
   max-height: 90vh;
   position: relative;
   z-index: 2;
-  overflow-y: auto; 
-  overflow-x: hidden; 
+  overflow: auto;
 }
 
 .register-header {
