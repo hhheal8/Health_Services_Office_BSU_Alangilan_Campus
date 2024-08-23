@@ -23,6 +23,9 @@ def admin_registration(request):
       
   return render(request, "users/admin_registration.html", {"form": form})
 
+def student_registration(request): 
+  return render(request, "users/student_registration.html")
+
 def user_login(request):
   return render(request, "users/login.html")
 

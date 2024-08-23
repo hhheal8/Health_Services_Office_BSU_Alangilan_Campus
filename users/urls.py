@@ -5,6 +5,7 @@ app_name = "users"
 
 urlpatterns = [
   path("register/admin", views.admin_registration, name="admin_registration"),
+  path("register/student", views.student_registration, name="student_registration"),
   path("login/", views.user_login, name="user_login"),
   path("admin/dashboard", views.admin_dashboard, name="admin_dashboard"),
   path("admin/inventory", views.admin_inventory, name="admin_inventory"),
