@@ -1,31 +1,27 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 from django.contrib import messages
-from django.conf import settings
-from django.core.mail import EmailMessage
-from django.utils import timezone
-from django.urls import reverse
-from .models import AdminProfile
+from .models import UserAdmin
+from .forms import UserAdminRegistration
 
 def admin_registration(request):
   if request.method == "POST":
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-
-    if User.objects.filter(username=username).exists():
-      messages.error(request, "Username already exists.")
-      return redirect("users:admin_registration")
+    form = UserAdminRegistration(request.POST, request.FILES)
+    if form.is_valid():
+      user = form.save(commit=False)
+      user.set_password(form.cleaned_data["password"])
+      user.is_staff = True
+      user.save()
+      messages.success(request, "Admin Registration Succesful! You Can Now Log In.")
+      login(request, user)
+      return redirect("users:admin_dashboard")
     else:
-      new_user = User.objects.create_user(
-        username=username,
-        password=password
-      )
-      messages.success(request, "Username created successfully. Proceed to complete the registration.")
-      return redirect("users:user_login")
-  
-  return render(request, "users/admin_registration.html")
+      messages.error(request, "Invalid Input! Please Try Again.")
+  else:
+    form = UserAdminRegistration()
+      
+  return render(request, "users/admin_registration.html", {"form": form})
 
 def user_login(request):
   return render(request, "users/login.html")

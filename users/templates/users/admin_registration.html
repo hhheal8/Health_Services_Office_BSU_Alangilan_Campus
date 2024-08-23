@@ -17,78 +17,118 @@ Admin Registration - Health Services Office | BSU Alangilan
             <h2>Health Service Office Alangilan Campus</h2>
         </div>
 
-        {% if messages %}
-            {% for message in messages %}
-                {% if messages.tags == 'error' %}
-                    <center><h4 style="color: firebrick;">{{message}}</h4></center>
-                {% else %}
-                    <center><h4 style="color: dodgerblue;">{{message}}</h4></center>
-                {% endif %} 
-            {% endfor %}
-        {% endif %}
-
-        <form id="registerForm" method="POST" action="{% url 'users:admin_registration' %}">
+        <form method="POST" action="{% url 'users:admin_registration' %}" enctype="multipart/form-data" id="registerForm">
             {% csrf_token %}
             <h2>Admin Registration</h2>
+
+            <div class="input-group">
+                <div>
+                    <label for="username">Username</label>
+                    <input type="text" id="userName" name="username" placeholder="Username" required>
+                    <div id="error" class="error">
+                        {{ form.username.errors }}
+                    </div>
+                </div>                
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" id="userName" name="password" placeholder="Password" required>
+                    <div id="error" class="error">
+                        {{ form.password.errors }}
+                    </div>
+                </div>
+            </div>
             <div class="input-group">
                 <div>
                     <label for="last_name">Last Name</label>
                     <input type="text" id="lastName" name="last_name" placeholder="Last Name" required>
+                    <div id="error" class="error">
+                        {{ form.last_name.errors }}
+                    </div>
                 </div>
                 <div>
                     <label for="first_name">First Name</label>
                     <input type="text" id="firstName" name="first_name" placeholder="First Name" required>
+                    <div id="error" class="error">
+                        {{ form.first_name.errors }}
+                    </div>
                 </div> 
                 <div>
                     <label for="middle_name">Middle Name</label>
                     <input type="text" id="middleName" name="middle_name" placeholder="Middle Name" required>
+                    <div id="error" class="error">
+                        {{ form.middle_name.errors }}
+                    </div>
                 </div> 
                 <div>
                     <label for="suffix">Suffix</label>
                     <input type="text" id="suffix" name="suffix" placeholder="Suffix">
+                    <div id="error" class="error">
+                        {{ form.suffix.errors }}
+                    </div>
                 </div>
             </div>
             <div class="input-group">
                 <div>
                     <label for="age">Age</label>
                     <input type="text" id="age" name="age" placeholder="Age" required>
+                    <div id="error" class="error">
+                        {{ form.age.errors }}
+                    </div>
                 </div>
                 <div>
                     <label for="position">Position</label>
                     <select id="position" name="position" required>
                         <option value="" disabled selected>Select Position</option>
-                        <option value="doctor">Doctor</option>
-                        <option value="nurse">Nurse</option>
+                        <option value="doctor" {% if form.position.value == "doctor" %} selected {% endif %}>Doctor</option>
+                        <option value="nurse" {% if form.position.value == "nurse" %} selected {% endif %}>Nurse</option>
                     </select>
+                    <div id="error" class="error">
+                        {{ form.position.errors }}
+                    </div>
                 </div> 
                 <div>
                     <label for="sex">Sex</label>
                     <select id="sex" name="sex" required>
                         <option value="" disabled selected>Select Sex</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                        <option value="male" {% if form.sex.value == "male" %} selected {% endif %}>Male</option>
+                        <option value="female" {% if form.sex.value == "female" %} selected {% endif %}>Female</option>
                     </select>
+                    <div id="error" class="error">
+                        {{ form.sex.errors }}
+                    </div>
                 </div> 
             </div>
             <div class="input-group">
                 <div>
                     <label for="contact_number">Contact Number</label>
                     <input type="text" id="contactNumber" name="contact_number" placeholder="Contact Number" required>
+                    <div id="error" class="error">
+                        {{ form.contact_number.errors }}
+                    </div>
                 </div>
                 <div>
                     <label for="telephone_number">Telephone Number</label>
-                    <input type="text" id="telephoneNumber" name="telephone_number" placeholder="Telephone Number" required>
+                    <input type="text" id="telephoneNumber" name="telephone_number" placeholder="Telephone Number">
+                    <div id="error" class="error">
+                        {{ form.telephone_number.errors }}
+                    </div>
                 </div>
                 <div>
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Email" required>
+                    <div id="error" class="error">
+                        {{ form.email.errors }}
+                    </div>
                 </div>
                 <div>
-                    <label for="profileImage">Profile Image</label>
+                    <label for="profile_image">Profile Image</label>
                 <div class="custom-file-input">
                     
-                    <input type="file" id="profileImage" name="profile_image" accept="image/*" required>
+                    <input type="file" id="profileImage" name="profile_image" accept="image/*">
                     <label for="profile_image"><i class="fas fa-upload"></i> Choose File</label>
+                    <div id="error" class="error">
+                        {{ form.profile_image.errors }}
+                    </div>
                 </div>
             </div>
             </div>
@@ -96,16 +136,22 @@ Admin Registration - Health Services Office | BSU Alangilan
                 <div>
                     <label for="present_address">Present Address</label>
                     <input type="text" id="presentAddress" name="present_address" placeholder="Present Address" required>
+                    <div id="error" class="error">
+                        {{ form.present_address.errors }}
+                    </div>
                 </div>
                 <div>
                     <label for="home_address">Home Address</label>
                     <input type="text" id="homeAddress" name="home_address" placeholder="Home Address" required>
+                    <div id="error" class="error">
+                        {{ form.home_address.errors }}
+                    </div>
                 </div>
             </div>
+
             <div class="form-footer">
                 <button type="submit" class="btn">Signup</button>
             </div>
-            <div id="error" class="error"></div>
         </form>
     </div>
 {% endblock content %}
