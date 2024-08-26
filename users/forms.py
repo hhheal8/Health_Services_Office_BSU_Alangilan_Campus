@@ -25,9 +25,9 @@ class UserStudentRegistration(forms.ModelForm):
     model = UserStudent
 
     fields = [
-      "middle_name", "suffix", "birth_date", "sr_code", "age", 
-      "sex", "contact_number", "telephone_number", "civil_status", "gsuite", 
-      "present_address", "home_address", "profile_image"
+      "username", "password", "first_name", "last_name", "middle_name", "suffix", 
+      "birth_date", "sr_code", "age", "sex", "contact_number", "telephone_number", 
+      "civil_status", "gsuite", "present_address", "home_address", "profile_image"
     ]
 
     widgets = {

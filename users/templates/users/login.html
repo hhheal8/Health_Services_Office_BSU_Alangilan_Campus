@@ -18,14 +18,15 @@
                 <h2>Alangilan Campus</h2>
             </div>
         </div>
-        <form id="loginForm">
+        <form method="POST" action="{% url 'users:user_login' %}" id="loginForm">
+            {% csrf_token %}
             <div class="role-group">
                 <button type="button" class="role-btn active" data-role="admin">Admin</button>
                 <button type="button" class="role-btn" data-role="student">Student</button>
             </div>
             <input type="hidden" id="role" name="role" value="admin">
             <div class="input-group">
-                <input type="text" id="username" name="username" placeholder="ID" required>
+                <input type="text" id="username" name="username" placeholder="Username" required>
             </div>
             <div class="input-group">
                 <input type="password" id="password" name="password" placeholder="Password" required>

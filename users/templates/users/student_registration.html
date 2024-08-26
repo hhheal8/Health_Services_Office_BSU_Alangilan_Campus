@@ -24,69 +24,42 @@
                 <div>
                     <label for="username">Username</label>
                     <input type="text" id="userName" name="username" placeholder="Username" required>
-                    <div id="error" class="error">
-                        {{ form.username.errors }}
-                    </div>
                 </div>                
                 <div>
                     <label for="password">Password</label>
                     <input type="password" id="userName" name="password" placeholder="Password" required>
-                    <div id="error" class="error">
-                        {{ form.password.errors }}
-                    </div>
                 </div>
             </div>
             <div class="input-group">
                 <div>
                     <label for="last_name">Last Name</label>
                     <input type="text" id="lastName" name="last_name" placeholder="Last Name" required>
-                    <div id="error" class="error">
-                        {{ form.last_name.errors }}
-                    </div>
                 </div>
                 <div>
                     <label for="first_name">First Name</label>
                     <input type="text" id="firstName" name="first_name" placeholder="First Name" required>
-                    <div id="error" class="error">
-                        {{ form.first_name.errors }}
-                    </div>
                 </div> 
                 <div>
                     <label for="middle_name">Middle Name</label>
                     <input type="text" id="middleName" name="middle_name" placeholder="Middle Name" required>
-                    <div id="error" class="error">
-                        {{ form.middle_name.errors }}
-                    </div>
                 </div> 
                 <div>
                     <label for="suffix">Suffix</label>
                     <input type="text" id="suffix" name="suffix" placeholder="Suffix">
-                    <div id="error" class="error">
-                        {{ form.suffix.errors }}
-                    </div>
                 </div>
             </div>
             <div class="input-group">
                 <div>
                     <label for="birth_date">Birth Date</label>
                     <input type="date" id="birthdate" name="birth_date" placeholder="Birth Date">
-                    <div id="error" class="error">
-                        {{ form.birth_date.errors }}
-                    </div>
                 </div>
                 <div>
                     <label for="sr_code">SR-Code</label>
                     <input type="text" id="srcode" name="sr_code" placeholder="SR-Code">
-                    <div id="error" class="error">
-                        {{ form.sr_code.errors }}
-                    </div>
                 </div>
                 <div>
                     <label for="age">Age</label>
                     <input type="text" id="age" name="age" placeholder="Age" required>
-                    <div id="error" class="error">
-                        {{ form.age.errors }}
-                    </div>
                 </div>
                 <div>
                     <label for="sex">Sex</label>
@@ -95,55 +68,34 @@
                         <option value="male" {% if form.sex.value == "male" %} selected {% endif %}>Male</option>
                         <option value="female" {% if form.sex.value == "female" %} selected {% endif %}>Female</option>
                     </select>
-                    <div id="error" class="error">
-                        {{ form.sex.errors }}
-                    </div>
                 </div> 
             </div>
             <div class="input-group">
                 <div>
                     <label for="contact_number">Contact Number</label>
                     <input type="text" id="contactNumber" name="contact_number" placeholder="Contact Number" required>
-                    <div id="error" class="error">
-                        {{ form.contact_number.errors }}
-                    </div>
                 </div>
                 <div>
                     <label for="telephone_number">Telephone Number</label>
                     <input type="text" id="telephoneNumber" name="telephone_number" placeholder="Telephone Number">
-                    <div id="error" class="error">
-                        {{ form.telephone_number.errors }}
-                    </div>
                 </div>
                 <div>
                     <label for="civil_status">Civil Status</label>
                     <input type="text" id="civilStatus" name="civil_status" placeholder="Civil Status" required>
-                    <div id="error" class="error">
-                        {{ form.civil_status.errors }}
-                    </div>
                 </div>
                 <div>
                     <label for="gsuite">Gsuite</label>
                     <input type="text" id="gsuite" name="gsuite" placeholder="Gsuite" required>
-                    <div id="error" class="error">
-                        {{ form.gsuite.errors }}
-                    </div>
                 </div>
             </div>
             <div class="input-group">
                 <div>
                     <label for="present_address">Present Address</label>
                     <input type="text" id="presentAddress" name="present_address" placeholder="Present Address" required>
-                    <div id="error" class="error">
-                        {{ form.present_address.errors }}
-                    </div>
                 </div>
                 <div>
                     <label for="home_address">Home Address</label>
                     <input type="text" id="homeAddress" name="home_address" placeholder="Home Address" required>
-                    <div id="error" class="error">
-                        {{ form.home_address.errors }}
-                    </div>
                 </div>
                 <div>
                     <label for="profile_image">Profile Image</label>
@@ -151,9 +103,6 @@
                     
                     <input type="file" id="profileImage" name="profile_image" accept="image/*">
                     <label for="profile_image"><i class="fas fa-upload"></i> Choose File</label>
-                    <div id="error" class="error">
-                        {{ form.profile_image.errors }}
-                    </div>
                 </div>
             </div>
             
