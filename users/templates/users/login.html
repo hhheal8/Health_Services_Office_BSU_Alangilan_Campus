@@ -12,7 +12,9 @@
 {% block content %}
     <div class="login-container">
         <div class="header">
-            <img src="{% static 'assets/img/logo.png' %}" alt="EUC HRIMS Logo" class="login-logo">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'assets/img/logo.png' %}" alt="EUC HRIMS Logo" class="login-logo">
+            </a>
             <div>
                 <h2>Health Services Office</h2>
                 <h2>Alangilan Campus</h2>

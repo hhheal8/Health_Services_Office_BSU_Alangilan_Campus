@@ -63,7 +63,7 @@ body {
 
 .right-panel {
   flex: 1;
-  background: url('/assets/img/background.png') no-repeat center center;
+  background: url("../img/background.png") no-repeat center center;
   background-size: cover;
   position: relative;
 }

@@ -65,8 +65,8 @@ def user_login(request):
       if (role == 'admin' and user.is_staff) or (role == 'student' and not user.is_staff):
         login(request, user)
         if role == 'admin':
-          return redirect('users:admin_dashboard')
-        elif role == 'student':
+          return redirect(reverse('users:admin_dashboard'))
+        if role == 'student':
           return redirect('users:admin_profile')
       else:
         print("Role mismatch")  # Debugging role mismatch
