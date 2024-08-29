@@ -57,7 +57,6 @@ def user_login(request):
 
     print(f"Login attempt - Username: {username}, Role: {role}")
 
-    # Authenticate the user
     user = authenticate(request, username=username, password=password)
     
     if user is not None:
@@ -69,10 +68,10 @@ def user_login(request):
         if role == 'student':
           return redirect('users:admin_profile')
       else:
-        print("Role mismatch")  # Debugging role mismatch
+        print("Role mismatch")  
         messages.error(request, "You don't have the necessary permissions for the selected role.")
     else:
-      print("Authentication failed")  # Debugging authentication failure
+      print("Authentication failed")  
       messages.error(request, "Invalid username or password.")
   
     return redirect('users:user_login')
