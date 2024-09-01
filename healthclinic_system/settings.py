@@ -43,6 +43,8 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = "users.UserAdmin"
 
+LOGIN_URL = "/"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

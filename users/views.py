@@ -88,27 +88,55 @@ def user_logout(request):
 def admin_dashboard(request):
   if not request.user.is_staff:
     messages.error(request, "You are not authorized to view this page.")
-    return redirect('/') 
+    return redirect("/") 
 
   return render(request, "users/admin/dashboard.html")
 
+@login_required
 def admin_inventory(request):
+  if not request.user.is_staff:
+    messages.error(request, "You are not authorized to view this page.")
+    return redirect("/")
   return render(request, "users/admin/inventory.html")
 
+@login_required
 def admin_profile(request):
+  if not request.user.is_staff:
+    messages.error(request, "You are not authorized to view this page.")
+    return redirect("/")
   return render(request, "users/admin/profile.html")
 
+@login_required
 def admin_student_app(request):
+  if not request.user.is_staff:
+    messages.error(request, "You are not authorized to view this page.")
+    return redirect("/")
   return render(request, "users/admin/student-app.html")
 
+@login_required
 def admin_student_history_profile(request):
+  if not request.user.is_staff:
+    messages.error(request, "You are not authorized to view this page.")
+    return redirect("/")
   return render(request, "users/admin/student-history-sampleProfile.html")
 
+@login_required
 def admin_student_history(request):
+  if not request.user.is_staff:
+    messages.error(request, "You are not authorized to view this page.")
+    return redirect("/")
   return render(request, "users/admin/student-history.html")
 
+@login_required
 def admin_student_record_profile(request):
+  if not request.user.is_staff:
+    messages.error(request, "You are not authorized to view this page.")
+    return redirect("/")
   return render(request, "users/admin/student-record-sampleProfile.html")
 
+@login_required
 def admin_student_records(request):
+  if not request.user.is_staff:
+    messages.error(request, "You are not authorized to view this page.")
+    return redirect("/")
   return render(request, "users/admin/student-records.html")
