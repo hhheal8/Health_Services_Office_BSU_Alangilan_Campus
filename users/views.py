@@ -66,7 +66,7 @@ def user_login(request):
         if role == 'admin':
           return redirect(reverse('users:admin_dashboard'))
         if role == 'student':
-          return redirect('users:admin_profile')
+          return redirect('users:student_home')
       else:
         print("Role mismatch")  
         messages.error(request, "You don't have the necessary permissions for the selected role.")
@@ -140,3 +140,10 @@ def admin_student_records(request):
     messages.error(request, "You are not authorized to view this page.")
     return redirect("/")
   return render(request, "users/admin/student-records.html")
+
+@login_required
+def student_home(request):
+  if not request.user.is_staff:
+    messages.error(request, "You are not authorized to view this page.")
+    return redirect("/")
+  return render(request, "users/student/home.html")
