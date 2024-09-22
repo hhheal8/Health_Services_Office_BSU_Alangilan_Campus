@@ -45,6 +45,12 @@ AUTH_USER_MODEL = "users.UserAdmin"
 
 LOGIN_URL = "/"
 
+# AUTHENTICATION_BACKENDS = [
+#     'users.backends.UserAdminBackend',
+#     'users.backends.UserStudentBackend',
+#     'django.contrib.auth.backends.ModelBackend',  # Keep the default backend if necessary
+# ]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

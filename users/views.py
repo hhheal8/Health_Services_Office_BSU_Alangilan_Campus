@@ -64,7 +64,7 @@ def user_login(request):
       if (role == 'admin' and user.is_staff) or (role == 'student' and not user.is_staff):
         login(request, user)
         if role == 'admin':
-          return redirect(reverse('users:admin_dashboard'))
+          return redirect('users:admin_dashboard')
         if role == 'student':
           return redirect('users:student_home')
       else:
@@ -77,6 +77,40 @@ def user_login(request):
     return redirect('users:user_login')
   else:
     return render(request, 'users/login.html')
+
+# def user_login(request):
+#   if request.method == 'POST':
+#     username = request.POST.get('username')
+#     password = request.POST.get('password')
+
+#     # Try to authenticate using the custom backends
+#     user = None
+#     user_admin = UserAdmin.objects.filter(username=username).first()
+#     user_student = UserStudent.objects.filter(username=username).first()
+
+#     if user_admin:
+#       user = authenticate(request, username=username, password=password)
+#     elif user_student:
+#       user = authenticate(request, username=username, password=password)
+
+#     if user is not None:
+#       login(request, user)  # Log the user in
+#       messages.info(request, f"Login successful for user: {username}")
+
+#       # Redirect based on user type
+#       if isinstance(user, UserStudent):
+#         return redirect('users:student_home')
+#       elif isinstance(user, UserAdmin):
+#         return redirect('users:admin_dashboard')
+#       else:
+#         messages.error(request, "User role not recognized.")
+#         return redirect('users:user_login')
+#     else:
+#       # If authentication fails, show an error message
+#       messages.error(request, "Invalid username or password.")
+#       return redirect('users:user_login')
+
+#   return render(request, 'users/login.html')
 
 @login_required
 def user_logout(request):
@@ -143,7 +177,4 @@ def admin_student_records(request):
 
 @login_required
 def student_home(request):
-  if not request.user.is_staff:
-    messages.error(request, "You are not authorized to view this page.")
-    return redirect("/")
   return render(request, "users/student/home.html")
