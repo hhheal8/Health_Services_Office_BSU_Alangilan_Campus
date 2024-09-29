@@ -165,7 +165,7 @@
           <img id="profileImage" src="{% static 'assets/img/dump.jpg' %}" alt="Profile Image">
         </div>
         <div class="profile-info">
-          <div class="name" id="profile-name">Eufemia Aldea</div>
+          <div class="name" id="profile-name">{{ request.user.first_name }} {{ request.user.last_name }}</div>
           <div class="info-item" id="profile-position"><strong>Position:</strong> Nurse</div>
         </div>
       </div>
@@ -186,7 +186,7 @@
           </div>
         </div>
       </div>
-      <button class="edit-button" onclick="openEditModal()">Edit Profile</button>
+      <button class="edit-button" data-bs-toggle="modal" data-bs-target="#editProfileModal" onclick="openEditModal()">Edit Profile</button>
     </div>
   </div>
 {% endblock content %}

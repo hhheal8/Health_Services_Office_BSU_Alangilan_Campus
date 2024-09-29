@@ -2,11 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import get_user_model
 from django.contrib import messages
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-from .models import AlangilanUsers
 from .forms import AdminRegistrationForm, StudentRegistrationForm
 
 def admin_registration(request):
@@ -15,7 +11,6 @@ def admin_registration(request):
     if form.is_valid():
       user = form.save()
       messages.success(request, "Admin Registration Successful! You Can Now Log In.")
-      # login(request, user)
       return redirect("users:user_login")
     else:
       messages.error(request, "Invalid Input! Please Try Again.")
@@ -30,7 +25,6 @@ def student_registration(request):
     if form.is_valid():
       user = form.save()
       messages.success(request, "Student Registration Successful! You Can Now Log In.")
-      # login(request, user)
       return redirect("users:user_login")
     else:
       messages.error(request, "Invalid Input! Please Try Again.")
@@ -51,9 +45,9 @@ def user_login(request):
       if user.role == role:
         login(request, user)
         if user.role == 'admin':
-          return redirect('users:admin_dashboard')  # Update this with your admin dashboard URL
+          return redirect('users:admin_dashboard') 
         elif user.role == 'student':
-          return redirect('users:student_home')  # Update this with your student dashboard URL
+          return redirect('users:student_home')
         else:
           messages.error(request, 'Invalid role selected for this user.')
           redirect("users:user_login")
