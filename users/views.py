@@ -6,111 +6,62 @@ from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .models import UserAdmin, UserStudent
-from .forms import UserAdminRegistration, UserStudentRegistration
-
-UserAdmin = get_user_model()
+from .models import AlangilanUsers
+from .forms import AdminRegistrationForm, StudentRegistrationForm
 
 def admin_registration(request):
   if request.method == "POST":
-    form = UserAdminRegistration(request.POST, request.FILES)
+    form = AdminRegistrationForm(request.POST, request.FILES)
     if form.is_valid():
-      user = form.save(commit=False)
-      user.set_password(form.cleaned_data["password"])
-      user.is_staff = True
-      user.is_superuser = True
-      user.save()
-      messages.success(request, "Admin Registration Succesful! You Can Now Log In.")
-      login(request, user)
+      user = form.save()
+      messages.success(request, "Admin Registration Successful! You Can Now Log In.")
+      # login(request, user)
       return redirect("users:user_login")
     else:
       messages.error(request, "Invalid Input! Please Try Again.")
       return redirect("users:admin_registration")
   else:
-    form = UserAdminRegistration()
+    form = AdminRegistrationForm()
   return render(request, "users/admin_registration.html", {"form": form})
 
 def student_registration(request):
   if request.method == "POST":
-    form = UserStudentRegistration(request.POST, request.FILES)
+    form = StudentRegistrationForm(request.POST, request.FILES)
     if form.is_valid():
-      user = form.save(commit=False)
-      user.set_password(form.cleaned_data["password"])
-      user.is_staff = False 
-      user.is_superuser = False 
-      user.save()
+      user = form.save()
       messages.success(request, "Student Registration Successful! You Can Now Log In.")
-      login(request, user)
+      # login(request, user)
       return redirect("users:user_login")
     else:
       messages.error(request, "Invalid Input! Please Try Again.")
       return redirect("users:student_registration")
   else:
-    form = UserStudentRegistration()
+    form = StudentRegistrationForm()
   return render(request, "users/student_registration.html", {"form": form})
 
 def user_login(request):
-  if request.method == "POST":
+  if request.method == 'POST':
     username = request.POST.get('username')
     password = request.POST.get('password')
     role = request.POST.get('role')
 
-    print(f"Login attempt - Username: {username}, Role: {role}")
-
     user = authenticate(request, username=username, password=password)
-    
+
     if user is not None:
-      print(f"Authenticated User: {user.username}, is_staff: {user.is_staff}")
-      if (role == 'admin' and user.is_staff) or (role == 'student' and not user.is_staff):
+      if user.role == role:
         login(request, user)
-        if role == 'admin':
-          return redirect('users:admin_dashboard')
-        if role == 'student':
-          return redirect('users:student_home')
+        if user.role == 'admin':
+          return redirect('users:admin_dashboard')  # Update this with your admin dashboard URL
+        elif user.role == 'student':
+          return redirect('users:student_home')  # Update this with your student dashboard URL
+        else:
+          messages.error(request, 'Invalid role selected for this user.')
+          redirect("users:user_login")
       else:
-        print("Role mismatch")  
-        messages.error(request, "You don't have the necessary permissions for the selected role.")
-    else:
-      print("Authentication failed")  
-      messages.error(request, "Invalid username or password.")
-  
-    return redirect('users:user_login')
-  else:
-    return render(request, 'users/login.html')
+        messages.error(request, 'Invalid username or password.')
+        redirect("users:user_login")
 
-# def user_login(request):
-#   if request.method == 'POST':
-#     username = request.POST.get('username')
-#     password = request.POST.get('password')
-
-#     # Try to authenticate using the custom backends
-#     user = None
-#     user_admin = UserAdmin.objects.filter(username=username).first()
-#     user_student = UserStudent.objects.filter(username=username).first()
-
-#     if user_admin:
-#       user = authenticate(request, username=username, password=password)
-#     elif user_student:
-#       user = authenticate(request, username=username, password=password)
-
-#     if user is not None:
-#       login(request, user)  # Log the user in
-#       messages.info(request, f"Login successful for user: {username}")
-
-#       # Redirect based on user type
-#       if isinstance(user, UserStudent):
-#         return redirect('users:student_home')
-#       elif isinstance(user, UserAdmin):
-#         return redirect('users:admin_dashboard')
-#       else:
-#         messages.error(request, "User role not recognized.")
-#         return redirect('users:user_login')
-#     else:
-#       # If authentication fails, show an error message
-#       messages.error(request, "Invalid username or password.")
-#       return redirect('users:user_login')
-
-#   return render(request, 'users/login.html')
+  return render(request, 'users/login.html')
 
 @login_required
 def user_logout(request):

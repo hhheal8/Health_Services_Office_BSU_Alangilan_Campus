@@ -1,7 +1,13 @@
-document.querySelectorAll('.role-btn').forEach(button => {
+const roleButtons = document.querySelectorAll('.role-btn');
+const roleInput = document.getElementById('role');
+
+roleButtons.forEach(button => {
     button.addEventListener('click', function() {
-        document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+        // Remove the active class from all buttons
+        roleButtons.forEach(btn => btn.classList.remove('active'));
+        // Add the active class to the clicked button
         this.classList.add('active');
-        document.getElementById('role').value = this.getAttribute('data-role');
+        // Set the hidden input value to the selected role
+        roleInput.value = this.dataset.role;
     });
 });

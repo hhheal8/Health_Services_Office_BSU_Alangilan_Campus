@@ -1,37 +1,44 @@
 from django import forms
-from .models import UserAdmin, UserStudent
+from django.forms.widgets import PasswordInput
+from .models import AlangilanUsers
 
-class UserAdminRegistration(forms.ModelForm):
-  password = forms.CharField(widget=forms.PasswordInput)
-
-  class Meta:
-    model = UserAdmin
+class AdminRegistrationForm(forms.ModelForm):
+  password = forms.CharField(widget=PasswordInput)
     
-    fields = [
-      "username", "password", "first_name", "last_name", "middle_name", 
-      "suffix", "age", "position", "sex", "contact_number", 
-      "telephone_number", "profile_image", "present_address", "home_address"
-    ]
-
-    widgets = {
-      "position": forms.Select(choices=UserAdmin.POSITION_CHOICES),
-      "sex": forms.Select(choices=UserAdmin.SEX_CHOICES)
-    }
-
-class UserStudentRegistration(forms.ModelForm):
-  password = forms.CharField(widget=forms.PasswordInput)
-
   class Meta:
-    model = UserStudent
-
+    model = AlangilanUsers
     fields = [
-      "username", "password", "first_name", "last_name", "middle_name", "suffix", 
-      "birth_date", "sr_code", "age", "sex", "contact_number", "telephone_number", 
-      "civil_status", "gsuite", "present_address", "home_address", "profile_image"
+      'username', 'first_name', 'last_name', 'middle_name', 'suffix', 
+      'age', 'position', 'sex', 'contact_number', 'telephone_number', 
+      'email', 'profile_image', 'present_address', 'home_address'       
     ]
+        
+  def save(self, commit=True):
+    user = super().save(commit=False)
+    user.set_password(self.cleaned_data['password'])
+    user.role = 'admin'
+    user.is_staff = True  # Allows access to Django admin
+    if commit:
+      user.save()
+    return user
 
-    widgets = {
-      "sex": forms.Select(choices=UserStudent.SEX_CHOICES),
-      "birth_date": forms.DateInput(attrs={"type": "date"})
-    }
-
+class StudentRegistrationForm(forms.ModelForm):
+  password = forms.CharField(widget=PasswordInput)
+    
+  class Meta:
+    model = AlangilanUsers
+    fields = [
+      'username', 'first_name', 'last_name', 'middle_name', 'suffix', 
+      'birth_date', 'sr_code', 'age', 'sex', 'contact_number', 
+      'telephone_number', 'email', 'civil_status', 'gsuite', 'present_address', 
+      'home_address', 'profile_image'
+    ]
+        
+  def save(self, commit=True):
+    user = super().save(commit=False)
+    user.set_password(self.cleaned_data['password'])
+    user.role = 'student'
+    user.is_staff = False
+    if commit:
+      user.save()
+    return user

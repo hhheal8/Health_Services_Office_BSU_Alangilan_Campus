@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'users'
 ]
 
-AUTH_USER_MODEL = "users.UserAdmin"
+AUTH_USER_MODEL = "users.AlangilanUsers"
 
 LOGIN_URL = "/"
 
