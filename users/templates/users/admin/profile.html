@@ -166,7 +166,7 @@
         </div>
         <div class="profile-info">
           <div class="name" id="profile-name">{{ request.user.first_name }} {{ request.user.last_name }}</div>
-          <div class="info-item" id="profile-position"><strong>Position:</strong> Nurse</div>
+          <div class="info-item" id="profile-position"><strong>Position:</strong> {{ request.user.position }}</div>
         </div>
       </div>
 
@@ -176,13 +176,13 @@
         <h3>Other Information</h3>
         <div class="info-row">
           <div class="info-column">
-            <div class="info-item" id="profile-age"><strong>Age:</strong> 39</div>
-            <div class="info-item" id="profile-contact"><strong>Contact Number:</strong> 09293456789</div>
-            <div class="info-item" id="profile-sex"><strong>Sex:</strong> Male</div>
+            <div class="info-item" id="profile-age"><strong>Age:</strong> {{ request.user.age }}</div>
+            <div class="info-item" id="profile-contact"><strong>Contact Number:</strong> {{ request.user.contact_number }}</div>
+            <div class="info-item" id="profile-sex"><strong>Sex:</strong> {{ request.user.sex }}</div>
           </div>
           <div class="info-column">
-            <div class="info-item" id="profile-address"><strong>Address:</strong> Los Angeles California, USA</div>
-            <div class="info-item" id="profile-email"><strong>E-mail Address:</strong> lebooboo@gmail.com</div>
+            <div class="info-item" id="profile-address"><strong>Address:</strong> {{ request.user.home_address }}</div>
+            <div class="info-item" id="profile-email"><strong>E-mail Address:</strong> {{ request.user.email }}</div>
           </div>
         </div>
       </div>
@@ -192,7 +192,7 @@
 {% endblock content %}
 
 {% block section %}
-  <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+  <div class="modal" id="editProfileModal" aria-labelledby="editProfileModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -207,19 +207,19 @@
             </div>
             <div class="mb-3">
               <label for="editName" class="form-label">Name</label>
-              <input type="text" class="form-control" id="editName" value="LeBron Raymone James">
+              <input type="text" class="form-control" id="editName" value="{{ request.user.first_name }} {{ request.user.last_name }}">
             </div>
             <div class="mb-3">
               <label for="editPosition" class="form-label">Position</label>
-              <input type="text" class="form-control" id="editPosition" value="Nurse">
+              <input type="text" class="form-control" id="editPosition" value="{{ request.user.position }}">
             </div>
             <div class="mb-3">
               <label for="editAge" class="form-label">Age</label>
-              <input type="number" class="form-control" id="editAge" value="39">
+              <input type="number" class="form-control" id="editAge" value="{{ request.user.age }}">
             </div>
             <div class="mb-3">
               <label for="editContact" class="form-label">Contact Number</label>
-              <input type="text" class="form-control" id="editContact" value="09293456789">
+              <input type="text" class="form-control" id="editContact" value="{{ request.user.contact_number }}">
             </div>
             <div class="mb-3">
               <label for="editSex">Sex</label>
@@ -230,11 +230,11 @@
             </div>
             <div class="mb-3">
               <label for="editAddress" class="form-label">Address</label>
-              <input type="text" class="form-control" id="editAddress" value="Los Angeles California, USA">
+              <input type="text" class="form-control" id="editAddress" value="{{ request.user.present_address }}">
             </div>
             <div class="mb-3">
               <label for="editEmail" class="form-label">E-mail Address</label>
-              <input type="email" class="form-control" id="editEmail" value="lebooboo@gmail.com">
+              <input type="email" class="form-control" id="editEmail" value="{{ request.user.email }}">
             </div>
           </form>
         </div>
