@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import AdminRegistrationForm, StudentRegistrationForm
+from .forms import AdminRegistrationForm, StudentRegistrationForm, AdminProfileUpdateForm
 
 def admin_registration(request):
   if request.method == "POST":
@@ -83,7 +83,19 @@ def admin_profile(request):
   if not request.user.is_staff:
     messages.error(request, "You are not authorized to view this page.")
     return redirect("/")
-  return render(request, "users/admin/profile.html")
+
+  if request.method == "POST":
+    form = AdminProfileUpdateForm(request.POST, request.FILES, instance=request.user)
+    if form.is_valid():
+      form.save()
+      messages.success(request, "Profile Successfully Updated.")
+      return redirect("users:admin_profile")
+    else:
+      messages.error(request, "Profile could not be updated.")
+  else:
+    form = AdminProfileUpdateForm(instance=request.user)
+  
+  return render(request, "users/admin/profile.html", {"form": form})
 
 @login_required
 def admin_student_app(request):

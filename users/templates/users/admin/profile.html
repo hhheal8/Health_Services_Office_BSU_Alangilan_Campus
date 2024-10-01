@@ -165,7 +165,7 @@
           <img id="profileImage" src="{% static 'assets/img/dump.jpg' %}" alt="Profile Image">
         </div>
         <div class="profile-info">
-          <div class="name" id="profile-name">{{ request.user.first_name }} {{ request.user.last_name }}</div>
+          <div class="name" id="profile-name">{{ request.user.first_name }} {{ request.user.middle_name }} {{ request.user.last_name }}</div>
           <div class="info-item" id="profile-position"><strong>Position:</strong> {{ request.user.position }}</div>
         </div>
       </div>
@@ -200,26 +200,33 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="editProfileForm">
+          <form method="POST" action="{% url 'users:admin_profile' %}" enctype="multipart/form-data" id="editProfileForm" >
+            {% csrf_token %}
             <div class="mb-3">
               <label for="editProfileImage" class="form-label">Profile Image</label>
-              <input type="file" class="form-control" id="editProfileImage" accept="image/*" onchange="previewImage(event)">
+              <input type="file" class="form-control" id="editProfileImage" name="profile_image" accept="image/*" onchange="previewImage(event)">
             </div>
             <div class="mb-3">
-              <label for="editName" class="form-label">Name</label>
-              <input type="text" class="form-control" id="editName" value="{{ request.user.first_name }} {{ request.user.last_name }}">
+              <label for="editFirstName" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="editFirstName" name="first_name" value="{{ request.user.first_name }}">
+
+              <label for="editMiddleName" class="form-label">Middle Name</label>
+              <input type="text" class="form-control" id="editMiddleName" name="middle_name" value="{{ request.user.middle_name }}">
+
+              <label for="editLastName" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="editLastName" name="last_name" value="{{ request.user.last_name }}">
             </div>
             <div class="mb-3">
               <label for="editPosition" class="form-label">Position</label>
-              <input type="text" class="form-control" id="editPosition" value="{{ request.user.position }}">
+              <input type="text" class="form-control" id="editPosition" name="position" value="{{ request.user.position }}">
             </div>
             <div class="mb-3">
               <label for="editAge" class="form-label">Age</label>
-              <input type="number" class="form-control" id="editAge" value="{{ request.user.age }}">
+              <input type="number" class="form-control" id="editAge" name="age" value="{{ request.user.age }}">
             </div>
             <div class="mb-3">
               <label for="editContact" class="form-label">Contact Number</label>
-              <input type="text" class="form-control" id="editContact" value="{{ request.user.contact_number }}">
+              <input type="text" class="form-control" id="editContact" name="contact_number" value="{{ request.user.contact_number }}">
             </div>
             <div class="mb-3">
               <label for="editSex">Sex</label>
@@ -230,17 +237,17 @@
             </div>
             <div class="mb-3">
               <label for="editAddress" class="form-label">Address</label>
-              <input type="text" class="form-control" id="editAddress" value="{{ request.user.present_address }}">
+              <input type="text" class="form-control" id="editAddress" name="present_address" value="{{ request.user.present_address }}">
             </div>
             <div class="mb-3">
               <label for="editEmail" class="form-label">E-mail Address</label>
-              <input type="email" class="form-control" id="editEmail" value="{{ request.user.email }}">
+              <input type="email" class="form-control" id="editEmail" name="email" value="{{ request.user.email }}">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="saveProfile()">Save changes</button>
         </div>
       </div>
     </div>
@@ -254,7 +261,7 @@
       modal.show();
     }
 
-    function previewImage(event) {
+    {% comment %} function previewImage(event) {
       var reader = new FileReader();
       reader.onload = function() {
         var output = document.getElementById('profileImage');
@@ -264,7 +271,9 @@
     }
 
     function saveProfile() {
-      var name = document.getElementById('editName').value;
+      var firstName = document.getElementById('editFirstName').value;
+      var middleName = document.getElementById('editMiddleName').value;
+      var lastName = document.getElementById('editLastName').value;
       var position = document.getElementById('editPosition').value;
       var age = document.getElementById('editAge').value;
       var contact = document.getElementById('editContact').value;
@@ -272,7 +281,7 @@
       var address = document.getElementById('editAddress').value;
       var email = document.getElementById('editEmail').value;
 
-      document.getElementById('profile-name').innerText = name;
+      document.getElementById('profile-name').innerText = `${firstName} ${middleName} ${lastName}`;
       document.getElementById('profile-position').innerHTML = '<strong>Position:</strong> ' + position;
       document.getElementById('profile-age').innerHTML = '<strong>Age:</strong> ' + age;
       document.getElementById('profile-contact').innerHTML = '<strong>Contact Number:</strong> ' + contact;
@@ -282,6 +291,6 @@
 
       var modal = bootstrap.Modal.getInstance(document.getElementById('editProfileModal'));
       modal.hide();
-    }
+    } {% endcomment %}
   </script>
 {% endblock js %}
