@@ -160,7 +160,13 @@ body, html {
   min-width: 250px; 
 }
 
+.modal-backdrop{
+  z-index: 1040 !important;
+}
 
+.modal{
+  z-index: 1050 !important;
+}
 
 .edit-button:hover {
   background-color: #a62e2e;
@@ -172,7 +178,8 @@ body, html {
 
 .modal-content {
   border-radius: 10px;
-  z-index: 5 !important;
+  position: relative;
+  z-index: 1051;
 }
 
 .modal-header {
