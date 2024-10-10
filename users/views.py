@@ -89,7 +89,7 @@ def admin_profile(request):
     if form.is_valid():
       form.save()
       messages.success(request, "Profile Successfully Updated.")
-      return redirect("users:admin_profile")
+      return redirect("users:admin_profile")  # Redirect after POST
     else:
       messages.error(request, "Profile could not be updated.")
   else:

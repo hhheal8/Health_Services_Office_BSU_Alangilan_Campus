@@ -206,7 +206,22 @@
               <label for="editProfileImage" class="form-label">Profile Image</label>
               <input type="file" class="form-control" id="editProfileImage" name="profile_image" accept="image/*" onchange="previewImage(event)">
             </div>
+
+            {% for field in form %}
             <div class="mb-3">
+              <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+              {{ field }}
+              {% if field.errors %}
+                <div class="alert alert-danger">
+                  {% for error in field.errors %}
+                    <p>{{ error }}</p>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+            {% endfor %}
+
+            {% comment %} <div class="mb-3">
               <label for="editFirstName" class="form-label">First Name</label>
               <input type="text" class="form-control" id="editFirstName" name="first_name" value="{{ request.user.first_name }}">
 
@@ -242,7 +257,7 @@
             <div class="mb-3">
               <label for="editEmail" class="form-label">E-mail Address</label>
               <input type="email" class="form-control" id="editEmail" name="email" value="{{ request.user.email }}">
-            </div>
+            </div> {% endcomment %}
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Save changes</button>

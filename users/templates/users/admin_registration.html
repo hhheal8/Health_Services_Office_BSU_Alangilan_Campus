@@ -23,6 +23,16 @@
             {% csrf_token %}
             <h2>Admin Registration</h2>
 
+            {% if form.errors %}
+            <div class="alert alert-danger">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <p>{{ field.label }}: {{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            {% endif %}
+            
             <div class="input-group">
                 <div>
                     <label for="username">Username</label>
@@ -30,7 +40,7 @@
                 </div>                
                 <div>
                     <label for="password">Password</label>
-                    <input type="password" id="userName" name="password" placeholder="Password" required>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
                 </div>
             </div>
             <div class="input-group">

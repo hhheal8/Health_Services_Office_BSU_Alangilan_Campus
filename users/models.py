@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 class AlangilanUsers(AbstractUser):
 
@@ -7,6 +8,7 @@ class AlangilanUsers(AbstractUser):
     ("admin", "Admin"),
     ("student", "Student")
   )
+  role = models.CharField(max_length=10, choices=ROLE_CHOICES)
 
   POSITION_CHOICES = [
     ("doctor", "Doctor"),
@@ -18,7 +20,6 @@ class AlangilanUsers(AbstractUser):
     ("female", "Female"),
   ]
   
-  role = models.CharField(max_length=10, choices=ROLE_CHOICES)
   middle_name = models.CharField(max_length=50, blank=True, null=True)
   suffix = models.CharField(max_length=10, blank=True, null=True)
   birth_date = models.DateField(null=True, blank=True)
