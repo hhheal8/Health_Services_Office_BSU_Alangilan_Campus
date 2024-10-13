@@ -14,19 +14,19 @@ class AlangilanUsers(AbstractUser):
     ("doctor", "Doctor"),
     ("nurse", "Nurse"),
   ]
+  position = models.CharField(max_length=6, choices=POSITION_CHOICES)
 
   SEX_CHOICES = [
     ("male", "Male"),
     ("female", "Female"),
   ]
+  sex = models.CharField(max_length=6, choices=SEX_CHOICES)
   
   middle_name = models.CharField(max_length=50, blank=True, null=True)
   suffix = models.CharField(max_length=10, blank=True, null=True)
   birth_date = models.DateField(null=True, blank=True)
   sr_code = models.CharField(max_length=50)
   age = models.IntegerField(blank=False, null=False)
-  position = models.CharField(max_length=6, choices=POSITION_CHOICES)
-  sex = models.CharField(max_length=6, choices=SEX_CHOICES)
   contact_number = models.CharField(max_length=15)
   telephone_number = models.CharField(max_length=15)
   civil_status = models.CharField(max_length=20)

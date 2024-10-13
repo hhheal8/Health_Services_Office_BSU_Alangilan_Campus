@@ -154,13 +154,20 @@ class AdminProfileUpdateForm(forms.ModelForm):
   class Meta:
     model = AlangilanUsers
     fields = [
-      'first_name', 'middle_name', 'last_name', 'position', 'age', 'contact_number', 
-      'sex', 'present_address', 'email'
+      'profile_image', 'first_name', 'middle_name', 'last_name', 'position', 
+      'age', 'contact_number', 'sex', 'present_address', 'email'
     ]
     widgets = {
-      'sex': forms.Select(choices=AlangilanUsers.SEX_CHOICES),
-      'position': forms.Select(choices=AlangilanUsers.POSITION_CHOICES),
       'profile_image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+      'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+      'middle_name': forms.TextInput(attrs={'class': 'form-control'}),
+      'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+      'position': forms.Select(choices=AlangilanUsers.POSITION_CHOICES),
+      'age': forms.NumberInput(attrs={'class': 'form-control'}),
+      'contact_number': forms.TextInput(attrs={'class': 'form-control'}),
+      'sex': forms.Select(choices=AlangilanUsers.SEX_CHOICES),
+      'present_address': forms.TextInput(attrs={'class': 'form-control'}),
+      'email': forms.EmailInput(attrs={'class': 'form-control'}),
     }
 
   def __init__(self, *args, **kwargs):

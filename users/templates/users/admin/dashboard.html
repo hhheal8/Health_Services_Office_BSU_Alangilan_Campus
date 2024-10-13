@@ -12,7 +12,7 @@
 
       <div class="profile-dashboard">
         <div class="profile-header">
-          <img src="{% static 'assets/img/dump.jpg' %}" alt="Profile Image" class="profile-image">
+          <img src="{{ request.user.profile_image.url }}" alt="Profile Image" class="profile-image">
           <div class="profile-info">
             <div class="greeting">Welcome,</div>
             <div><span class="name">{{ request.user.first_name }} {{ request.user.middle_name }} {{ request.user.last_name }}</span></div>

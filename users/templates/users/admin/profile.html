@@ -162,7 +162,7 @@
     <div class="profile-container">
       <div class="profile-details">
         <div class="profile-image">
-          <img id="profileImage" src="{% static 'assets/img/dump.jpg' %}" alt="Profile Image">
+          <img id="profileImage" src="{{ request.user.profile_image.url }}" alt="Profile Image">
         </div>
         <div class="profile-info">
           <div class="name" id="profile-name">{{ request.user.first_name }} {{ request.user.middle_name }} {{ request.user.last_name }}</div>
@@ -202,62 +202,25 @@
         <div class="modal-body">
           <form method="POST" action="{% url 'users:admin_profile' %}" enctype="multipart/form-data" id="editProfileForm" >
             {% csrf_token %}
-            <div class="mb-3">
-              <label for="editProfileImage" class="form-label">Profile Image</label>
-              <input type="file" class="form-control" id="editProfileImage" name="profile_image" accept="image/*" onchange="previewImage(event)">
-            </div>
 
             {% for field in form %}
-            <div class="mb-3">
-              <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-              {{ field }}
-              {% if field.errors %}
-                <div class="alert alert-danger">
-                  {% for error in field.errors %}
-                    <p>{{ error }}</p>
-                  {% endfor %}
-                </div>
-              {% endif %}
-            </div>
+              <div class="mb-3">
+                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                {% if field.name == 'profile_image' %}
+                  <input type="file" class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}" accept="image/*" onchange="previewImage(event)">
+                {% else %}
+                  {{ field }}
+                {% endif %}
+                {% if field.errors %}
+                  <div class="alert alert-danger">
+                    {% for error in field.errors %}
+                      <p>{{ error }}</p>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
             {% endfor %}
 
-            {% comment %} <div class="mb-3">
-              <label for="editFirstName" class="form-label">First Name</label>
-              <input type="text" class="form-control" id="editFirstName" name="first_name" value="{{ request.user.first_name }}">
-
-              <label for="editMiddleName" class="form-label">Middle Name</label>
-              <input type="text" class="form-control" id="editMiddleName" name="middle_name" value="{{ request.user.middle_name }}">
-
-              <label for="editLastName" class="form-label">Last Name</label>
-              <input type="text" class="form-control" id="editLastName" name="last_name" value="{{ request.user.last_name }}">
-            </div>
-            <div class="mb-3">
-              <label for="editPosition" class="form-label">Position</label>
-              <input type="text" class="form-control" id="editPosition" name="position" value="{{ request.user.position }}">
-            </div>
-            <div class="mb-3">
-              <label for="editAge" class="form-label">Age</label>
-              <input type="number" class="form-control" id="editAge" name="age" value="{{ request.user.age }}">
-            </div>
-            <div class="mb-3">
-              <label for="editContact" class="form-label">Contact Number</label>
-              <input type="text" class="form-control" id="editContact" name="contact_number" value="{{ request.user.contact_number }}">
-            </div>
-            <div class="mb-3">
-              <label for="editSex">Sex</label>
-              <select id="editSex" name="sex" class="form-control">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="editAddress" class="form-label">Address</label>
-              <input type="text" class="form-control" id="editAddress" name="present_address" value="{{ request.user.present_address }}">
-            </div>
-            <div class="mb-3">
-              <label for="editEmail" class="form-label">E-mail Address</label>
-              <input type="email" class="form-control" id="editEmail" name="email" value="{{ request.user.email }}">
-            </div> {% endcomment %}
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Save changes</button>
