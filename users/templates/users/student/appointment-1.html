@@ -2,18 +2,17 @@
 {% load static %}
 
 {% block title %}
-  Appointment - Health Services Office | BSU Alangilan
+  Appointment 1 - Health Services Office | BSU Alangilan
 {% endblock title %}
 
 {% block content %}
-  <!-- Content Area -->
   <div class="content">
     <div class="steps">
       <div class="step active" data-href="{% url 'users:student_appointment1' %}">1</div>
-      <div class="step" data-href="appointment-2.html">2</div>
-      <div class="step" data-href="appointment-3.html">3</div>
-      <div class="step" data-href="appointment-4.html">4</div>
-      <div class="step" data-href="appointment-5.html">5</div>
+      <div class="step" data-href="{% url 'users:student_appointment2' %}">2</div>
+      <div class="step" data-href="{% url 'users:student_appointment3' %}">3</div>
+      <div class="step" data-href="{% url 'users:student_appointment4_form1' %}">4</div>
+      <div class="step" data-href="{% url 'users:student_appointment5' %}">5</div>
     </div>
     
     <div class="container">

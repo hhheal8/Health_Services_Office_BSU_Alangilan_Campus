@@ -23,5 +23,10 @@ urlpatterns = [
   path("user-admin/student_records", views.admin_student_records, name="admin_student_records"),
 
   path("user-student/home", views.student_home, name="student_home"),
-  path("user-student/appointment1", views.student_appointment1, name="student_appointment1")
+  path("user-student/appointment1", views.student_appointment1, name="student_appointment1"),
+  path("user-student/appointment2", views.student_appointment2, name="student_appointment2"),
+  path("user-student/appointment3", views.student_appointment3, name="student_appointment3"),
+  path("user-student/appointment4_form1", views.student_appointment4_form1, name="student_appointment4_form1"),
+  path("user-student/appointment4_form2", views.student_appointment4_form2, name="student_appointment4_form2"),
+  path("user-student/appointment5", views.student_appointment5, name="student_appointment5"),
 ]

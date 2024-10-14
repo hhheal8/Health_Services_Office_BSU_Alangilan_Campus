@@ -139,3 +139,23 @@ def student_home(request):
 @login_required
 def student_appointment1(request):
   return render(request, "users/student/appointment-1.html")
+
+@login_required
+def student_appointment2(request):
+  return render(request, "users/student/appointment-2.html")
+
+@login_required
+def student_appointment3(request):
+  return render(request, "users/student/appointment-3.html")
+
+@login_required
+def student_appointment4_form1(request):
+  return render(request, "users/student/appointment-4-form1.html")
+
+@login_required
+def student_appointment4_form2(request):
+  return render(request, "users/student/appointment-4-form2.html")
+
+@login_required
+def student_appointment5(request):
+  return render(request, "users/student/appointment-5.html")
