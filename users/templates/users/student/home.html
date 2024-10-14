@@ -10,7 +10,7 @@
     <div class="container">
       <h2>Hi, {{ request.user.first_name }}</h2>
       <h3>How can I help you today?</h3>
-      <button class="btn-appointment" onclick="window.location.href='appointment-1.html'">Appointment</button>
+      <button class="btn-appointment" onclick="window.location.href='{% url 'users:student_appointment1' %}'">Appointment</button>
     </div>
   </div>
 {% endblock content %}

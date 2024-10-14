@@ -89,7 +89,7 @@ def admin_profile(request):
     if form.is_valid():
       form.save()
       messages.success(request, "Profile Successfully Updated.")
-      return redirect("users:admin_profile")  # Redirect after POST
+      return redirect("users:admin_profile")
     else:
       messages.error(request, "Profile could not be updated.")
   else:
@@ -135,3 +135,7 @@ def admin_student_records(request):
 @login_required
 def student_home(request):
   return render(request, "users/student/home.html")
+
+@login_required
+def student_appointment1(request):
+  return render(request, "users/student/appointment-1.html")

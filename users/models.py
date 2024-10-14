@@ -35,5 +35,9 @@ class AlangilanUsers(AbstractUser):
   home_address = models.CharField(max_length=255)
   profile_image = models.ImageField(upload_to="profile_images/")
 
+  @property
+  def full_name(self):
+    return f"{self.first_name} {self.middle_name or ''} {self.last_name}"
+  
   def __str__(self):
     return self.username

@@ -1,104 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/header.css">
-  <link rel="stylesheet" href="assets/css/appointment-1.css">
-</head>
-<body>
-  <!-- Main Container -->
-  <div>
-    <!-- Header -->
-    <div class="header">
-      <div class="header-left">
-        <a href="dashboard.html" class="logo">
-          <img src="assets/img/logo.png" width="90" height="80" alt="" class="mx-2 my-1">
-        </a>
-        <div class="header-title">
-          <h2 class="h2 mb-0">Health Services Office</h2>
-        </div>
-      </div>
-      <div class="header-right">
-        <a href="home.html" class="active">Home</a>
-        <a href="schedule.html">My Schedule</a>
-        <a href="request.html">Request</a>
-        <div class="dropdown">
-          <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            Profile<i class="fas fa-circle-user"></i>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="profile.html">View Profile</a></li>
-            <li><a class="dropdown-item" href="homepage.html">Log Out</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="pink-line"></div>
-    </div>
-    <!-- End Header -->
+{% extends "layout/student_layout.html" %}
+{% load static %}
 
-    <!-- Main Content Area -->
-    <div class="main-container">
-      <!-- Content Area -->
-      <div class="content">
-        <div class="steps">
-          <div class="step active" data-href="appointment-1.html">1</div>
-          <div class="step" data-href="appointment-2.html">2</div>
-          <div class="step" data-href="appointment-3.html">3</div>
-          <div class="step" data-href="appointment-4.html">4</div>
-          <div class="step" data-href="appointment-5.html">5</div>
-        </div>
-        <div class="container">
-          <div class="white-container">
-            <div class="transaction-log">
-              <h2>Transaction Log Sheet</h2>
-              <form class="transaction-log-form">
-                <div class="form-group">
-                  <label for="name">Name:</label>
-                  <input type="text" id="name" name="name" class="form-control">
-                </div>
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="sex">Sex:</label>
-                    <input type="text" id="sex" name="sex" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label for="sr-code">SR-Code:</label>
-                    <input type="text" id="sr-code" name="sr-code" class="form-control">
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="course">Course:</label>
-                    <input type="text" id="course" name="course" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label for="department">Department:</label>
-                    <input type="text" id="department" name="department" class="form-control">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="date">Date:</label>
-                  <input type="date" id="date" name="date" class="form-control">
-                </div>
-                <div class="form-group">
-                  <button type="button" class="nextbutton" id="nextButton">Next</button>
-                </div>
-              </form>
+{% block title %}
+  Appointment - Health Services Office | BSU Alangilan
+{% endblock title %}
+
+{% block content %}
+  <!-- Content Area -->
+  <div class="content">
+    <div class="steps">
+      <div class="step active" data-href="{% url 'users:student_appointment1' %}">1</div>
+      <div class="step" data-href="appointment-2.html">2</div>
+      <div class="step" data-href="appointment-3.html">3</div>
+      <div class="step" data-href="appointment-4.html">4</div>
+      <div class="step" data-href="appointment-5.html">5</div>
+    </div>
+    
+    <div class="container">
+      <div class="white-container">
+        <div class="transaction-log">
+          <h2>Transaction Log Sheet</h2>
+          <form method="POST" class="transaction-log-form">
+            {% csrf_token %}
+
+
+
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="full_name" class="form-control">
             </div>
-          </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="sex">Sex:</label>
+                <input type="text" id="sex" name="sex" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="sr-code">SR-Code:</label>
+                <input type="text" id="sr-code" name="sr-code" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="course">Course:</label>
+                <input type="text" id="course" name="course" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="department">Department:</label>
+                <input type="text" id="department" name="department" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="date">Date:</label>
+              <input type="date" id="date" name="date" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <button type="button" class="nextbutton" id="nextButton">Next</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-    <!-- End Main Content Area -->
   </div>
-  <!-- End Main Container -->
-
-  <script src="/student/assets/js/appointment-1.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% endblock content %}

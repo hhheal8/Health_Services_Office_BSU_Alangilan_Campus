@@ -22,5 +22,6 @@ urlpatterns = [
   path("user-admin/student_record_profile", views.admin_student_record_profile, name="admin_student_record_profile"),
   path("user-admin/student_records", views.admin_student_records, name="admin_student_records"),
 
-  path("user-student/home", views.student_home, name="student_home")
+  path("user-student/home", views.student_home, name="student_home"),
+  path("user-student/appointment1", views.student_appointment1, name="student_appointment1")
 ]
