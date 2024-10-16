@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import AdminRegistrationForm, StudentRegistrationForm, AdminProfileUpdateForm
+from .forms import AdminRegistrationForm, StudentRegistrationForm, AdminProfileUpdateForm, StudentProfileUpdateForm, StudentAppointmentForm
 
 def admin_registration(request):
   if request.method == "POST":
@@ -138,7 +138,20 @@ def student_home(request):
 
 @login_required
 def student_appointment1(request):
-  return render(request, "users/student/appointment-1.html")
+  if request.method == "POST":
+    form = StudentAppointmentForm(request.POST)
+    if form.is_valid():
+      appointment1 = form.save(commit=False)
+      appointment1.user = request.user
+      appointment1.save()
+      messages.success(request, "Appointment 1 is Successful.")
+      return redirect("users:student_appointment2")
+    else:
+      messages.error(request, "Appointment 1 is not Successful.")
+  else:
+    form = StudentAppointmentForm()
+
+  return render(request, "users/student/appointment-1.html", {"form": form})
 
 @login_required
 def student_appointment2(request):
@@ -159,3 +172,18 @@ def student_appointment4_form2(request):
 @login_required
 def student_appointment5(request):
   return render(request, "users/student/appointment-5.html")
+
+@login_required
+def student_edit_profile(request):
+  if request.method == "POST":
+    form = StudentProfileUpdateForm(request.POST, instance=request.user)
+    if form.is_valid():
+      form.save()
+      messages.success(request, "Profile Successfully Updated.")
+      return redirect("users:student_edit_profile")
+    else:
+      messages.error(request, "Profile could not be updated.")
+  else:
+    form = StudentProfileUpdateForm(instance=request.user)
+  
+  return render(request, "users/student/editProfile.html", {"form": form})

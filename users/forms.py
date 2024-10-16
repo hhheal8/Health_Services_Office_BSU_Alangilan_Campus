@@ -1,6 +1,6 @@
 from django import forms
 from django.forms.widgets import PasswordInput
-from .models import AlangilanUsers
+from .models import AlangilanUsers, UserAppointment
 from django.core.exceptions import ValidationError
 
 class AdminRegistrationForm(forms.ModelForm):
@@ -85,17 +85,41 @@ class AdminProfileUpdateForm(forms.ModelForm):
       'contact_number': forms.TextInput(attrs={'class': 'form-control'}),
       'sex': forms.Select(choices=AlangilanUsers.SEX_CHOICES),
       'present_address': forms.TextInput(attrs={'class': 'form-control'}),
-      'email': forms.EmailInput(attrs={'class': 'form-control'}),
+      'email': forms.EmailInput(attrs={'class': 'form-control'})
     }
 
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
     self.fields['email'].required = True
 
-# class StudentAppointmentForm(forms.ModelForm):
-#   class Meta:
-#     model = AlangilanUsers
-#     fields = ['full_name', 'sex', 'sr_code', 'course', 'department', 'date']
-#     widgets = {
-#       'full_name': forms.TextInput(attrs={''})
-#     }
+class StudentProfileUpdateForm(forms.ModelForm): 
+  class Meta:
+    model = AlangilanUsers
+    fields = [
+      'first_name', 'middle_name', 'last_name', 'sr_code', 'age', 
+      'sex', 'contact_number', 'present_address', 'email'
+    ]
+    widgets = {
+      'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+      'middle_name': forms.TextInput(attrs={'class': 'form-control'}),
+      'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+      'sr_code': forms.TextInput(attrs={'class': 'form-control'}),
+      'age': forms.NumberInput(attrs={'class': 'form-control'}),
+      'sex': forms.Select(choices=AlangilanUsers.SEX_CHOICES),
+      'contact_number': forms.TextInput(attrs={'class': 'form-control'}),
+      'present_address': forms.TextInput(attrs={'class': 'form-control'}),
+      'email': forms.EmailInput(attrs={'class': 'form-control'})
+    }
+
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.fields['email'].required = True
+
+class StudentAppointmentForm(forms.ModelForm):
+  class Meta:
+    model = UserAppointment
+    fields = ['course', 'department']
+    widgets = {
+      'course': forms.TextInput(attrs={'class': 'form-control'}),
+      'department': forms.TextInput(attrs={'class': 'form-control'})
+    }

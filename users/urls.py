@@ -29,4 +29,5 @@ urlpatterns = [
   path("user-student/appointment4_form1", views.student_appointment4_form1, name="student_appointment4_form1"),
   path("user-student/appointment4_form2", views.student_appointment4_form2, name="student_appointment4_form2"),
   path("user-student/appointment5", views.student_appointment5, name="student_appointment5"),
+  path("user-student/edit_profile", views.student_edit_profile, name="student_edit_profile")
 ]

@@ -41,3 +41,13 @@ class AlangilanUsers(AbstractUser):
   
   def __str__(self):
     return self.username
+
+class UserAppointment(models.Model):
+
+  user = models.ForeignKey(AlangilanUsers, on_delete=models.CASCADE)
+  
+  course = models.CharField(max_length=100)
+  department = models.CharField(max_length=100)
+
+  def __str__(self):
+    return f"Appointment for {self.user.full_name}"

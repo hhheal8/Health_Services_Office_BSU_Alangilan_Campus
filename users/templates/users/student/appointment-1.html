@@ -19,42 +19,37 @@
       <div class="white-container">
         <div class="transaction-log">
           <h2>Transaction Log Sheet</h2>
-          <form method="POST" class="transaction-log-form">
+
+          <form method="POST" action="{% url 'users:student_appointment1' %}" class="transaction-log-form">
             {% csrf_token %}
-
-
 
             <div class="form-group">
               <label for="name">Name:</label>
-              <input type="text" id="name" name="full_name" class="form-control">
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="sex">Sex:</label>
-                <input type="text" id="sex" name="sex" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="sr-code">SR-Code:</label>
-                <input type="text" id="sr-code" name="sr-code" class="form-control">
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="course">Course:</label>
-                <input type="text" id="course" name="course" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="department">Department:</label>
-                <input type="text" id="department" name="department" class="form-control">
-              </div>
+              <input type="text" id="name" name="full_name" class="form-control" value="{{ request.user.full_name }}">
             </div>
             <div class="form-group">
-              <label for="date">Date:</label>
-              <input type="date" id="date" name="date" class="form-control">
+              <label for="sex">Sex</label>
+              <select id="sex" name="sex" required>
+                <option value="{{ request.user.sex }}" disabled selected>Select Sex</option>
+                <option value="male" {% if form.sex.value == "male" %} selected {% endif %}>Male</option>
+                <option value="female" {% if form.sex.value == "female" %} selected {% endif %}>Female</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="sr-code">SR-Code:</label>
+              <input type="text" id="sr-code" name="sr_code" class="form-control" value="{{ request.user.sr_code }}">
+            </div>
+            <div class="form-group">
+              <label for="course">Course:</label>
+              <input type="text" id="course" name="course" class="form-control" value="{{ request.user.course }}">
+            </div>
+            <div class="form-group">
+              <label for="department">Department:</label>
+              <input type="text" id="department" name="department" class="form-control" value="{{ request.user.department }}">
             </div>
 
             <div class="form-group">
-              <button type="button" class="nextbutton" id="nextButton">Next</button>
+              <button type="submit" class="nextbutton" id="nextButton">Next</button>
             </div>
           </form>
         </div>
