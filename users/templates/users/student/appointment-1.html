@@ -30,7 +30,7 @@
             <div class="form-group">
               <label for="sex">Sex</label>
               <select id="sex" name="sex" required>
-                <option value="{{ request.user.sex }}" disabled selected>Select Sex</option>
+                <option value="" disabled selected>Select Sex</option>
                 <option value="male" {% if form.sex.value == "male" %} selected {% endif %}>Male</option>
                 <option value="female" {% if form.sex.value == "female" %} selected {% endif %}>Female</option>
               </select>

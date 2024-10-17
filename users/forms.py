@@ -96,10 +96,11 @@ class StudentProfileUpdateForm(forms.ModelForm):
   class Meta:
     model = AlangilanUsers
     fields = [
-      'first_name', 'middle_name', 'last_name', 'sr_code', 'age', 
+      'profile_image', 'first_name', 'middle_name', 'last_name', 'sr_code', 'age', 
       'sex', 'contact_number', 'present_address', 'email'
     ]
     widgets = {
+      'profile_image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
       'first_name': forms.TextInput(attrs={'class': 'form-control'}),
       'middle_name': forms.TextInput(attrs={'class': 'form-control'}),
       'last_name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -118,8 +119,21 @@ class StudentProfileUpdateForm(forms.ModelForm):
 class StudentAppointmentForm(forms.ModelForm):
   class Meta:
     model = UserAppointment
-    fields = ['course', 'department']
+    fields = [
+      'course', 'department'
+    ]
     widgets = {
       'course': forms.TextInput(attrs={'class': 'form-control'}),
       'department': forms.TextInput(attrs={'class': 'form-control'})
     }
+
+# class StudentAppointment2Form(forms.ModelForm):
+#   class Meta:
+#     model = UserAppointment
+#     fields = [
+#       'appointment_date', 'appointment_time'
+#     ]
+#     widgets = {
+#       'appointment_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+#       'appointment_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'})
+#     }

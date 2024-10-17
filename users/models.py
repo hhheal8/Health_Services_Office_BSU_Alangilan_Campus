@@ -30,7 +30,7 @@ class AlangilanUsers(AbstractUser):
   contact_number = models.CharField(max_length=15)
   telephone_number = models.CharField(max_length=15)
   civil_status = models.CharField(max_length=20)
-  gsuite = models.CharField(max_length=50)
+  gsuite = models.CharField(max_length=50, null=True, blank=True)
   present_address = models.CharField(max_length=255)
   home_address = models.CharField(max_length=255)
   profile_image = models.ImageField(upload_to="profile_images/")
@@ -45,9 +45,11 @@ class AlangilanUsers(AbstractUser):
 class UserAppointment(models.Model):
 
   user = models.ForeignKey(AlangilanUsers, on_delete=models.CASCADE)
-  
+
   course = models.CharField(max_length=100)
   department = models.CharField(max_length=100)
+  # appointment_date = models.DateField()
+  # appointment_time = models.TimeField()
 
   def __str__(self):
     return f"Appointment for {self.user.full_name}"

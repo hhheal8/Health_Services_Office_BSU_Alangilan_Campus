@@ -240,7 +240,7 @@
       modal.show();
     }
 
-    {% comment %} function previewImage(event) {
+    function previewImage(event) {
       var reader = new FileReader();
       reader.onload = function() {
         var output = document.getElementById('profileImage');
@@ -248,28 +248,5 @@
       };
       reader.readAsDataURL(event.target.files[0]);
     }
-
-    function saveProfile() {
-      var firstName = document.getElementById('editFirstName').value;
-      var middleName = document.getElementById('editMiddleName').value;
-      var lastName = document.getElementById('editLastName').value;
-      var position = document.getElementById('editPosition').value;
-      var age = document.getElementById('editAge').value;
-      var contact = document.getElementById('editContact').value;
-      var sex = document.getElementById('editSex').value;
-      var address = document.getElementById('editAddress').value;
-      var email = document.getElementById('editEmail').value;
-
-      document.getElementById('profile-name').innerText = `${firstName} ${middleName} ${lastName}`;
-      document.getElementById('profile-position').innerHTML = '<strong>Position:</strong> ' + position;
-      document.getElementById('profile-age').innerHTML = '<strong>Age:</strong> ' + age;
-      document.getElementById('profile-contact').innerHTML = '<strong>Contact Number:</strong> ' + contact;
-      document.getElementById('profile-sex').innerHTML = '<strong>Sex:</strong> ' + sex;
-      document.getElementById('profile-address').innerHTML = '<strong>Address:</strong> ' + address;
-      document.getElementById('profile-email').innerHTML = '<strong>E-mail Address:</strong> ' + email;
-
-      var modal = bootstrap.Modal.getInstance(document.getElementById('editProfileModal'));
-      modal.hide();
-    } {% endcomment %}
   </script>
 {% endblock js %}

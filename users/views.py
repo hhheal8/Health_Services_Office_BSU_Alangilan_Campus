@@ -155,6 +155,19 @@ def student_appointment1(request):
 
 @login_required
 def student_appointment2(request):
+  # if request.method == "POST":
+  #   form = StudentAppointment2Form(request.POST)
+  #   if form.is_valid():
+  #     appointment2 = form.save(commit=False)
+  #     appointment2.user = request.user
+  #     appointment2.save()
+  #     messages.success(request, "Appointment 2 is Successful.")
+  #     return redirect("users:student_appointment3")
+  #   else:
+  #     messages.error(request, "Appointment 2 is not Successful.")
+  # else:
+  #   form = StudentAppointment2Form()
+
   return render(request, "users/student/appointment-2.html")
 
 @login_required
@@ -174,16 +187,16 @@ def student_appointment5(request):
   return render(request, "users/student/appointment-5.html")
 
 @login_required
-def student_edit_profile(request):
+def student_profile(request):
   if request.method == "POST":
-    form = StudentProfileUpdateForm(request.POST, instance=request.user)
+    form = StudentProfileUpdateForm(request.POST, request.FILES, instance=request.user)
     if form.is_valid():
       form.save()
       messages.success(request, "Profile Successfully Updated.")
-      return redirect("users:student_edit_profile")
+      return redirect("users:student_profile")
     else:
       messages.error(request, "Profile could not be updated.")
   else:
     form = StudentProfileUpdateForm(instance=request.user)
-  
-  return render(request, "users/student/editProfile.html", {"form": form})
+
+  return render(request, "users/student/profile.html", {"form": form})

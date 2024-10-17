@@ -18,59 +18,66 @@
     <div class="container">
       <div class="note" id="note">Please select a date and time slot for your appointment.</div>
       <div class="selection-display" id="selection-display"></div>
-      <div class="schedule-container">
-        <div class="calendar">
-          <table class="table calendar-table">
-            <thead>
-              <tr>
-                <th><button class="btn btn-outline-secondary" onclick="prevMonth()">&#8249;</button></th>
-                <th colspan="5" id="calendar-month" class="text-center">April</th>
-                <th><button class="btn btn-outline-secondary" onclick="nextMonth()">&#8250;</button></th>
-              </tr>
-              <tr>
-                <th>Sun</th>
-                <th>Mon</th>
-                <th>Tue</th>
-                <th>Wed</th>
-                <th>Thu</th>
-                <th>Fri</th>
-                <th>Sat</th>
-              </tr>
-            </thead>
-            <tbody id="calendar-body">
-              <!-- Calendar dates will be dynamically generated here -->
-            </tbody>
-          </table>
-        </div>
-        <div class="time-slots">
-          <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" id="timeSlotDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              Select a time
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="timeSlotDropdown">
-              <li><a class="dropdown-item" href="#">8:00-8:30am</a></li>
-              <li><a class="dropdown-item" href="#">8:30-9:00am</a></li>
-              <li><a class="dropdown-item" href="#">9:00-9:30am</a></li>
-              <li><a class="dropdown-item" href="#">9:30-10:00am</a></li>
-              <li><a class="dropdown-item" href="#">10:00-10:30am</a></li>
-              <li><a class="dropdown-item" href="#">10:30-11:00am</a></li>
-              <li><a class="dropdown-item" href="#">11:00-11:30am</a></li>
-              <li><a class="dropdown-item" href="#">11:30-12:00pm</a></li>
-              <li><a class="dropdown-item" href="#">1:00-1:30pm</a></li>
-              <li><a class="dropdown-item" href="#">1:30-2:00pm</a></li>
-              <li><a class="dropdown-item" href="#">2:00-2:30pm</a></li>
-              <li><a class="dropdown-item" href="#">2:30-3:00pm</a></li>
-              <li><a class="dropdown-item" href="#">3:00-3:30pm</a></li>
-              <li><a class="dropdown-item" href="#">3:30-4:00pm</a></li>
-              <li><a class="dropdown-item" href="#">4:00-4:30pm</a></li>
-              <li><a class="dropdown-item" href="#">4:30-5:00pm</a></li>
-              <li><a class="dropdown-item" href="#">5:00-5:30pm</a></li>
-              <li><a class="dropdown-item" href="#">7:00-7:30pm</a></li>
-            </ul>
+
+      <form method="POST" action="{% url 'users:student_appointment2' %}">
+        {% csrf_token %}
+
+        <div class="schedule-container">
+          <div class="calendar">
+            <table class="table calendar-table">
+              <thead>
+                <tr>
+                  <th><button class="btn btn-outline-secondary" onclick="prevMonth()">&#8249;</button></th>
+                  <th colspan="5" id="calendar-month" class="text-center">April</th>
+                  <th><button class="btn btn-outline-secondary" onclick="nextMonth()">&#8250;</button></th>
+                </tr>
+                <tr>
+                  <th>Sun</th>
+                  <th>Mon</th>
+                  <th>Tue</th>
+                  <th>Wed</th>
+                  <th>Thu</th>
+                  <th>Fri</th>
+                  <th>Sat</th>
+                </tr>
+              </thead>
+              <tbody id="calendar-body">
+                <!-- Calendar dates will be dynamically generated here -->
+              </tbody>
+            </table>
           </div>
-          <button type="button" class="nextbutton" id="nextButton">Next</button>
+          <div class="time-slots">
+            <div class="dropdown">
+              <button class="btn dropdown-toggle" type="button" id="timeSlotDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Select a time
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="timeSlotDropdown">
+                <li><a class="dropdown-item" href="#">8:00-8:30am</a></li>
+                <li><a class="dropdown-item" href="#">8:30-9:00am</a></li>
+                <li><a class="dropdown-item" href="#">9:00-9:30am</a></li>
+                <li><a class="dropdown-item" href="#">9:30-10:00am</a></li>
+                <li><a class="dropdown-item" href="#">10:00-10:30am</a></li>
+                <li><a class="dropdown-item" href="#">10:30-11:00am</a></li>
+                <li><a class="dropdown-item" href="#">11:00-11:30am</a></li>
+                <li><a class="dropdown-item" href="#">11:30-12:00pm</a></li>
+                <li><a class="dropdown-item" href="#">1:00-1:30pm</a></li>
+                <li><a class="dropdown-item" href="#">1:30-2:00pm</a></li>
+                <li><a class="dropdown-item" href="#">2:00-2:30pm</a></li>
+                <li><a class="dropdown-item" href="#">2:30-3:00pm</a></li>
+                <li><a class="dropdown-item" href="#">3:00-3:30pm</a></li>
+                <li><a class="dropdown-item" href="#">3:30-4:00pm</a></li>
+                <li><a class="dropdown-item" href="#">4:00-4:30pm</a></li>
+                <li><a class="dropdown-item" href="#">4:30-5:00pm</a></li>
+                <li><a class="dropdown-item" href="#">5:00-5:30pm</a></li>
+                <li><a class="dropdown-item" href="#">7:00-7:30pm</a></li>
+              </ul>
+            </div>
+            <input type="hidden" id="appointment_date" name="appointment_date">
+            <input type="hidden" id="appointment_time" name="appointment_time">
+            <button type="submit" class="nextbutton" id="nextButton">Next</button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 {% endblock content %}
