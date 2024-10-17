@@ -9,7 +9,11 @@
   <div class="content">
     <div class="steps">
       <div class="step active" data-href="{% url 'users:student_appointment1' %}">1</div>
-      <div class="step" data-href="{% url 'users:student_appointment2' %}">2</div>
+      {% if appointment_id %}
+        <div class="step" data-href="{% url 'users:student_appointment2' appointment_id=appointment_id %}">2</div>
+      {% else %}
+        <div class="step" data-href="#">2</div>
+      {% endif %}
       <div class="step" data-href="{% url 'users:student_appointment3' %}">3</div>
       <div class="step" data-href="{% url 'users:student_appointment4_form1' %}">4</div>
       <div class="step" data-href="{% url 'users:student_appointment5' %}">5</div>

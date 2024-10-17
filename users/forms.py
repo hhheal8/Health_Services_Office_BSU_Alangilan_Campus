@@ -116,7 +116,7 @@ class StudentProfileUpdateForm(forms.ModelForm):
     super().__init__(*args, **kwargs)
     self.fields['email'].required = True
 
-class StudentAppointmentForm(forms.ModelForm):
+class StudentAppointment1Form(forms.ModelForm):
   class Meta:
     model = UserAppointment
     fields = [
@@ -127,13 +127,13 @@ class StudentAppointmentForm(forms.ModelForm):
       'department': forms.TextInput(attrs={'class': 'form-control'})
     }
 
-# class StudentAppointment2Form(forms.ModelForm):
-#   class Meta:
-#     model = UserAppointment
-#     fields = [
-#       'appointment_date', 'appointment_time'
-#     ]
-#     widgets = {
-#       'appointment_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-#       'appointment_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'})
-#     }
+class StudentAppointment2Form(forms.ModelForm):
+  class Meta:
+    model = UserAppointment
+    fields = [
+      'appointment_date', 'appointment_time'
+    ]
+    widgets = {
+      'appointment_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+      'appointment_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'})
+    }

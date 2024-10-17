@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import AdminRegistrationForm, StudentRegistrationForm, AdminProfileUpdateForm, StudentProfileUpdateForm, StudentAppointmentForm
+from .models import UserAppointment
+from .forms import AdminRegistrationForm, StudentRegistrationForm, AdminProfileUpdateForm, StudentProfileUpdateForm, StudentAppointment1Form, StudentAppointment2Form
 
 def admin_registration(request):
   if request.method == "POST":
@@ -139,36 +140,42 @@ def student_home(request):
 @login_required
 def student_appointment1(request):
   if request.method == "POST":
-    form = StudentAppointmentForm(request.POST)
+    form = StudentAppointment1Form(request.POST)
     if form.is_valid():
-      appointment1 = form.save(commit=False)
-      appointment1.user = request.user
-      appointment1.save()
+      appointment = form.save(commit=False)
+      appointment.user = request.user
+      appointment.appointment_date = None
+      appointment.appointment_time = None
+      appointment.save()  
       messages.success(request, "Appointment 1 is Successful.")
-      return redirect("users:student_appointment2")
+      print(f"Redirecting to step 2 with appointment_id={appointment.id}")  
+      return redirect("users:student_appointment2", appointment_id=appointment.id)
     else:
-      messages.error(request, "Appointment 1 is not Successful.")
+      print(form.errors)  
+      messages.error(request, "Appointment 1 submission failed.")
   else:
-    form = StudentAppointmentForm()
+    form = StudentAppointment1Form()
 
   return render(request, "users/student/appointment-1.html", {"form": form})
 
 @login_required
-def student_appointment2(request):
-  # if request.method == "POST":
-  #   form = StudentAppointment2Form(request.POST)
-  #   if form.is_valid():
-  #     appointment2 = form.save(commit=False)
-  #     appointment2.user = request.user
-  #     appointment2.save()
-  #     messages.success(request, "Appointment 2 is Successful.")
-  #     return redirect("users:student_appointment3")
-  #   else:
-  #     messages.error(request, "Appointment 2 is not Successful.")
-  # else:
-  #   form = StudentAppointment2Form()
+def student_appointment2(request, appointment_id):
+  appointment = get_object_or_404(UserAppointment, id=appointment_id)
+  if request.method == "POST":
+    form = StudentAppointment2Form(request.POST, instance=appointment)
+    if form.is_valid():
+      form.save()
+      messages.success(request, "Appointment 2 is Successful.")
+      return redirect("users:student_home")
+    else:
+      messages.error(request, "Appointment 2 submission failed.")
+  else:
+    form = StudentAppointment2Form(instance=appointment)
 
-  return render(request, "users/student/appointment-2.html")
+  return render(request, "users/student/appointment-2.html", {
+    "form": form,
+    "appointment": appointment
+  })
 
 @login_required
 def student_appointment3(request):
