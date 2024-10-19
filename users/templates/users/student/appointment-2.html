@@ -26,7 +26,7 @@
       <form method="POST" action="{% url 'users:student_appointment2' appointment_id=appointment.id %}">
         {% csrf_token %}
 
-        <div class="schedule-container">
+        {% comment %} <div class="schedule-container">
           <div class="calendar">
             <table class="table calendar-table">
               <thead>
@@ -76,11 +76,21 @@
                 <li><a class="dropdown-item" href="#">7:00-7:30pm</a></li>
               </ul>
             </div>
-            <input type="hidden" id="appointment_date" name="appointment_date">
-            <input type="hidden" id="appointment_time" name="appointment_time">
-            <button type="submit" class="nextbutton" id="nextButton">Next</button>
+          </div>
+        </div> {% endcomment %}
+
+        <div class="appointment_scheduling">
+          <div class="mb-3">
+            <label for="appointmentDate" class="form-label">Select a Date</label>
+            <input type="date" name="appointment_date" id="appointmentDate" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="appointmentTime" class="form-label">Select a Time</label>
+            <input type="time" name="appointment_time" id="appointmentTime" class="form-control">
           </div>
         </div>
+
+        <button type="submit" class="nextbutton" id="nextButton">Next</button>
       </form>
     </div>
   </div>

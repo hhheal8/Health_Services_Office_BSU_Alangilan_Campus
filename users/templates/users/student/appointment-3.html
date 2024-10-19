@@ -23,17 +23,21 @@
       <h2 class="text-center">APPOINTMENT</h2>
       <div class="appointment-buttons">
         <button class="appointment-button" id="button1">
-          <ul> 
-            <li>Pre-Employment Medical Examination</li>
-            <li>OJT Medical Examination</li>
-          </ul>
+          <a href="{% url 'users:student_appointment4_form2' %}">
+            <ul> 
+              <li>Pre-Employment Medical Examination</li>
+              <li>OJT Medical Examination</li>
+            </ul>
+          </a>
         </button>
         
         <button class="appointment-button" id="button2">
-          <ul> 
-            <li>Sports Medical Examination</li>
-            <li>Pre-Enrollment Medical Examination</li>
-          </ul>
+          <a href="{% url 'users:student_appointment4_form1' %}">
+            <ul> 
+              <li>Sports Medical Examination</li>
+              <li>Pre-Enrollment Medical Examination</li>
+            </ul>
+          </a>
         </button>
       </div>
       <div class="note">Reminder: Bring all of your requirements (X-ray, Drug Test, Blood Typing)<br> and the hardcopy of your forms.</div>
