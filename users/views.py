@@ -3,8 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.urls import reverse
 from .models import UserAppointment
-from .forms import AdminRegistrationForm, StudentRegistrationForm, AdminProfileUpdateForm, StudentProfileUpdateForm, StudentAppointment1Form, StudentAppointment2Form
+from .forms import AdminRegistrationForm, StudentRegistrationForm, AdminProfileUpdateForm, StudentProfileUpdateForm, StudentAppointment1Form, StudentAppointment2Form, StudentAppointment4Form2
 
 def admin_registration(request):
   if request.method == "POST":
@@ -164,9 +165,12 @@ def student_appointment2(request, appointment_id):
   if request.method == "POST":
     form = StudentAppointment2Form(request.POST, instance=appointment)
     if form.is_valid():
-      form.save()
+      appointment = form.save(commit=False)
+      appointment.user = request.user
+      appointment.save()
       messages.success(request, "Appointment 2 is Successful.")
-      return redirect("users:student_home")
+      print(f"Redirecting to step 3 with appointment_id={appointment.id}")  
+      return redirect("users:student_appointment3", appointment_id=appointment.id)
     else:
       messages.error(request, "Appointment 2 submission failed.")
   else:
@@ -178,20 +182,37 @@ def student_appointment2(request, appointment_id):
   })
 
 @login_required
-def student_appointment3(request):
-  return render(request, "users/student/appointment-3.html")
+def student_appointment3(request, appointment_id):
+  appointment = get_object_or_404(UserAppointment, id=appointment_id)
+  return render(request, "users/student/appointment-3.html", {"appointment": appointment})
 
 @login_required
-def student_appointment4_form1(request):
-  return render(request, "users/student/appointment-4-form1.html")
+def student_appointment4_form2(request, appointment_id):
+  appointment = get_object_or_404(UserAppointment, id=appointment_id)
+  if request.method=="POST":
+    form = StudentAppointment4Form2(request.POST, request.FILES, instance=appointment)
+    if form.is_valid():
+      appointment = form.save(commit=False)
+      appointment.user = request.user
+      appointment.save()
+      messages.success(request, "Appointment 4 is Successful.")
+      print(f"Redirecting to step 5 with URL: {reverse('users:student_appointment5', kwargs={'appointment_id': appointment.id})}")
+      print(f"Redirecting to step 5 with appointment_id={appointment.id}")
+      return redirect("users:student_appointment5", appointment_id=appointment.id)
+    else:
+      messages.error(request, "Appointment 4 submission failed.")
+  else:
+    form = StudentAppointment4Form2(instance=appointment)
+
+  return render(request, "users/student/appointment-4-form2.html", {
+    "form": form,
+    "appointment": appointment
+  })
 
 @login_required
-def student_appointment4_form2(request):
-  return render(request, "users/student/appointment-4-form2.html")
-
-@login_required
-def student_appointment5(request):
-  return render(request, "users/student/appointment-5.html")
+def student_appointment5(request, appointment_id):
+  appointment = get_object_or_404(UserAppointment, id=appointment_id)
+  return render(request, "users/student/appointment-5.html", {"appointment": appointment})
 
 @login_required
 def student_profile(request):

@@ -137,3 +137,18 @@ class StudentAppointment2Form(forms.ModelForm):
       'appointment_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
       'appointment_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'})
     }
+
+class StudentAppointment4Form2(forms.ModelForm):
+  class Meta:
+    model = UserAppointment
+    fields = [
+      'date', 'position_program_status', 'date_of_examination', 
+      'signature_printed_name_employee_student', 'picture_hard_copy', 
+    ]
+    widgets = {
+      'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+      'position_program_status': forms.TextInput(attrs={'class': 'form-control'}),
+      'date_of_examination': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+      'signature_printed_name_employee_student': forms.ClearableFileInput(attrs={'class': 'custom-file-input'}),
+      'picture_hard_copy': forms.ClearableFileInput(attrs={'class': 'custom-file-input'})
+    }

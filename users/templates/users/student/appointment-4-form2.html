@@ -7,56 +7,72 @@
 
 {% block content %}
   <div class="content">
-    <div class="steps">
+    {% comment %} <div class="steps">
       <div class="step" data-href="{% url 'users:student_appointment1' %}">1</div>
       {% if appointment_id %}
         <div class="step" data-href="{% url 'users:student_appointment2' appointment_id=appointment_id %}">2</div>
       {% else %}
         <div class="step" data-href="#">2</div>
       {% endif %}
-      <div class="step" data-href="{% url 'users:student_appointment3' %}">3</div>
-      <div class="step active" data-href="{% url 'users:student_appointment4_form1' %}">4</div>
-      <div class="step" data-href="{% url 'users:student_appointment5' %}">5</div>
-    </div>
+      {% if appointment_id %}
+        <div class="step" data-href="{% url 'users:student_appointment3' appointment_id=appointment_id %}">3</div>
+      {% else %}
+        <div class="step" data-href="#">3</div>
+      {% endif %}
+      {% if appointment_id %}
+        <div class="step active" data-href="{% url 'users:student_appointment4_form2' appointment_id=appointment_id %}">4</div>
+      {% else %}
+        <div class="step active" data-href="#">4</div>
+      {% endif %}
+      {% if appointment_id %}
+        <div class="step" data-href="{% url 'users:student_appointment5' appointment_id=appointment_id %}">5</div>
+      {% else %}
+        <div class="step" data-href="#">5</div>
+      {% endif %}
+    </div> {% endcomment %}
     
     <div class="container">
       <div class="white-container">
         <div class="form">
           <h2>Pre-employment/ OJT Medical Examination Form</h2>
 
-          <form class="form-form" id="examinationForm">
+          <form method="POST" enctype="multipart/form-data" action="{% url 'users:student_appointment4_form2' appointment_id=appointment.id %}" class="form-form" id="examinationForm">
             <div class="form-row">
               <div class="form-group">
                 <label for="lname">Last Name:</label>
-                <input type="text" id="lname" name="lname" class="form-control">
+                <input type="text" id="lname" name="last_name" class="form-control" value="{{ request.user.last_name }}">
               </div>
               <div class="form-group">
                 <label for="fname">First Name:</label>
-                <input type="text" id="fname" name="fname" class="form-control">
+                <input type="text" id="fname" name="first_name" class="form-control" value="{{ request.user.first_name }}">
               </div>
               <div class="form-group">
                 <label for="mname">Middle Name:</label>
-                <input type="text" id="mname" name="mname" class="form-control">
+                <input type="text" id="mname" name="middle_name" class="form-control" value="{{ request.user.middle_name }}">
               </div>
               <div class="form-group">
                 <label for="suffix">Suffix:</label>
-                <input type="text" id="suffix" name="suffix" class="form-control">
+                <input type="text" id="suffix" name="suffix" class="form-control" value="{{ request.user.suffix }}">
               </div>
             </div>
             
             <div class="form-row">
               <div class="form-group">
                 <label for="sex">Sex:</label>
-                <input type="text" id="sex" name="sex" class="form-control">
+                <select name="sex" id="sex" class="form-control" required>
+                  <option value="" disabled selected>Select Sex</option>
+                  <option value="male">{% if form.sex.value == "male" %} selected {% endif %} Male</option>
+                  <option value="female">{% if form.sex.value == "female" %} selected {% endif %} Female</option>
+                </select>
               </div>
               <div class="form-group">
                 <label for="age">Age:</label>
-                <input type="text" id="age" name="age" class="form-control">
+                <input type="text" id="age" name="age" class="form-control" value="{{ request.user.age }}">
               </div>
 
               <div class="form-group">
                 <label for="birthdate">Birthdate:</label>
-                <input type="date" id="birthdate" name="date" class="form-control">
+                <input type="date" id="birthdate" name="birth_date" class="form-control" value="{{ request.user.birth_date|date:'Y-m-d' }}">
               </div>
 
               <div class="form-group">
@@ -67,21 +83,21 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="status">Civil Status:</label>
-                <input type="text" id="status" name="status" class="form-control">
+                <input type="text" id="status" name="civil_status" class="form-control" value="{{ request.user.civil_status }}">
               </div>
               <div class="form-group">
                 <label for="tnumber">Telephone Number:</label>
-                <input type="text" id="tnumber" name="tnumber" class="form-control">
+                <input type="text" id="tnumber" name="telephone_number" class="form-control" value="{{ request.user.telephone_number }}">
               </div>
               <div class="form-group">
                 <label for="cnumber">Contact Number:</label>
-                <input type="text" id="cnumber" name="cnumber" class="form-control">
+                <input type="text" id="cnumber" name="contact_number" class="form-control" value="{{ request.user.contact_number }}">
               </div>
             </div>
 
             <div class="form-group">
               <label for="address">Address:</label>
-              <input type="text" id="address" name="address" class="form-control">
+              <input type="text" id="address" name="present_address" class="form-control" value="{{ request.user.present_address }}">
             </div>
             <div class="form-group">
               <label for="position">Position/Program/Status:</label>
@@ -94,15 +110,15 @@
             
             <div class="form-row">
               <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" class="form-control">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="full_name" class="form-control" value="{{ request.user.full_name }}">
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group">
                 <label for="status">Civil Status:</label>
-                <input type="text" id="status" name="status" class="form-control">
+                <input type="text" id="status" name="civil_status" class="form-control" value="{{ request.user.civil_status }}">
               </div>
             
               <div class="form-group">
@@ -112,19 +128,19 @@
 
               <div class="form-group">
                 <label for="examdate">Date of Examination:</label>
-                <input type="date" id="examdate" name="examdate" class="form-control">
+                <input type="date" id="examdate" name="date_of_examination" class="form-control">
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group">
-                <input type="file" id="upload-file" name="upload-file" class="custom-file-input">
+                <input type="file" id="upload-file" name="signature_printed_name_employee_student" class="custom-file-input">
                 <label for="upload-file" class="custom-file-label"><i class="fas fa-upload"></i> Upload File Here</label>
                 <label for="upload-file">Signature Over Printed Name of Employee/Student</label>
               </div>
 
               <div class="form-group">
-                <input type="file" id="upload-file" name="upload-file" class="custom-file-input">
+                <input type="file" id="upload-file" name="picture_hard_copy" class="custom-file-input">
                 <label for="upload-file" class="custom-file-label"><i class="fas fa-upload"></i> Upload File</label>
                 <br><label for="upload-file">Upload the picture of your hard copy</label>
               </div>

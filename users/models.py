@@ -48,8 +48,15 @@ class UserAppointment(models.Model):
 
   course = models.CharField(max_length=100, null=False, blank=False)
   department = models.CharField(max_length=100, null=False, blank=False)
+
   appointment_date = models.DateField(null=True, blank=True)
   appointment_time = models.TimeField(null=True, blank=True)
+
+  date = models.DateField(null=True, blank=True)
+  position_program_status = models.CharField(max_length=100, null=True, blank=False)
+  date_of_examination = models.DateField(null=True, blank=True)
+  signature_printed_name_employee_student = models.ImageField(upload_to="signature_over_printed_name_employee_students/", null=True, blank=True)
+  picture_hard_copy = models.ImageField(upload_to="picture_hard_copys/", null=True, blank=True)
 
   def __str__(self):
     return f"Appointment for {self.user.full_name}"
