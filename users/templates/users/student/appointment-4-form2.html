@@ -37,6 +37,8 @@
           <h2>Pre-employment/ OJT Medical Examination Form</h2>
 
           <form method="POST" enctype="multipart/form-data" action="{% url 'users:student_appointment4_form2' appointment_id=appointment.id %}" class="form-form" id="examinationForm">
+            {% csrf_token %}
+
             <div class="form-row">
               <div class="form-group">
                 <label for="lname">Last Name:</label>
@@ -101,7 +103,7 @@
             </div>
             <div class="form-group">
               <label for="position">Position/Program/Status:</label>
-              <input type="text" id="position" name="position" class="form-control">
+              <input type="text" id="position" name="position_program_status" class="form-control">
             </div>
 
             <div class="certification">
@@ -134,15 +136,14 @@
 
             <div class="form-row">
               <div class="form-group">
-                <input type="file" id="upload-file" name="signature_printed_name_employee_student" class="custom-file-input">
-                <label for="upload-file" class="custom-file-label"><i class="fas fa-upload"></i> Upload File Here</label>
-                <label for="upload-file">Signature Over Printed Name of Employee/Student</label>
+                <input type="file" id="signature-file" name="signature_printed_name_employee_student" class="custom-file-input" accept="image/*" onchange="previewImage(event)">
+                <label for="signature-file" class="custom-file-label"><i class="fas fa-upload"></i> Upload File Here</label>
+                <label for="signature-file">Signature Over Printed Name of Employee/Student</label>
               </div>
-
               <div class="form-group">
-                <input type="file" id="upload-file" name="picture_hard_copy" class="custom-file-input">
-                <label for="upload-file" class="custom-file-label"><i class="fas fa-upload"></i> Upload File</label>
-                <br><label for="upload-file">Upload the picture of your hard copy</label>
+                <input type="file" id="hardcopy-file" name="picture_hard_copy" class="custom-file-input" accept="image/*" onchange="previewImage(event)">
+                <label for="hardcopy-file" class="custom-file-label"><i class="fas fa-upload"></i> Upload File</label>
+                <br><label for="hardcopy-file">Upload the picture of your hard copy</label>
               </div>
             </div>
 
@@ -155,3 +156,16 @@
     </div>
   </div>
 {% endblock content %}
+
+{% block js %}
+  <script>
+    function previewImage(event) {
+      var reader = new FileReader();
+      reader.onload = function() {
+        var output = document.getElementById('profileImage');
+        output.src = reader.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  </script>
+{% endblock js %}

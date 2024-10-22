@@ -200,6 +200,7 @@ def student_appointment4_form2(request, appointment_id):
       print(f"Redirecting to step 5 with appointment_id={appointment.id}")
       return redirect("users:student_appointment5", appointment_id=appointment.id)
     else:
+      print(form.errors)
       messages.error(request, "Appointment 4 submission failed.")
   else:
     form = StudentAppointment4Form2(instance=appointment)
