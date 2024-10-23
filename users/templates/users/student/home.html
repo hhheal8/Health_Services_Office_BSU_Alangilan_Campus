@@ -10,7 +10,13 @@
     <div class="container">
       <h2>Hi, {{ request.user.first_name }}</h2>
       <h3>How can I help you today?</h3>
-      <button class="btn-appointment" onclick="window.location.href='{% url 'users:student_appointment1' %}'">Appointment</button>
+
+      {% if appointment %}
+        <button class="btn-appointment" onclick="window.location.href='{% url 'users:student_appointment1' appointment_id=appointment.id %}'">Appointment</button>
+      {% else %}
+        <button class="btn-appointment" onclick="window.location.href='#'">No Appointments</button>
+      {% endif %}
+
     </div>
   </div>
 {% endblock content %}

@@ -36,7 +36,7 @@
         <div class="transaction-log">
           <h2>Transaction Log Sheet</h2>
 
-          <form method="POST" action="{% url 'users:student_appointment1' %}" class="transaction-log-form">
+          <form method="POST" action="{% url 'users:student_appointment1' appointment_id=appointment.id %}" class="transaction-log-form">
             {% csrf_token %}
 
             <div class="form-group">

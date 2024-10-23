@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from django.urls import reverse
 from .models import UserAppointment
@@ -69,7 +70,7 @@ def user_logout(request):
 def admin_dashboard(request):
   if not request.user.is_staff:
     messages.error(request, "You are not authorized to view this page.")
-    return redirect("/") 
+    raise PermissionDenied 
 
   return render(request, "users/admin/dashboard.html")
 
@@ -77,14 +78,14 @@ def admin_dashboard(request):
 def admin_inventory(request):
   if not request.user.is_staff:
     messages.error(request, "You are not authorized to view this page.")
-    return redirect("/")
+    raise PermissionDenied
   return render(request, "users/admin/inventory.html")
 
 @login_required
 def admin_profile(request):
   if not request.user.is_staff:
     messages.error(request, "You are not authorized to view this page.")
-    return redirect("/")
+    raise PermissionDenied
 
   if request.method == "POST":
     form = AdminProfileUpdateForm(request.POST, request.FILES, instance=request.user)
@@ -103,43 +104,46 @@ def admin_profile(request):
 def admin_student_app(request):
   if not request.user.is_staff:
     messages.error(request, "You are not authorized to view this page.")
-    return redirect("/")
+    raise PermissionDenied
   return render(request, "users/admin/student-app.html")
 
 @login_required
 def admin_student_history_profile(request):
   if not request.user.is_staff:
     messages.error(request, "You are not authorized to view this page.")
-    return redirect("/")
+    raise PermissionDenied
   return render(request, "users/admin/student-history-sampleProfile.html")
 
 @login_required
 def admin_student_history(request):
   if not request.user.is_staff:
     messages.error(request, "You are not authorized to view this page.")
-    return redirect("/")
+    raise PermissionDenied
   return render(request, "users/admin/student-history.html")
 
 @login_required
 def admin_student_record_profile(request):
   if not request.user.is_staff:
     messages.error(request, "You are not authorized to view this page.")
-    return redirect("/")
+    raise PermissionDenied
   return render(request, "users/admin/student-record-sampleProfile.html")
 
 @login_required
 def admin_student_records(request):
   if not request.user.is_staff:
     messages.error(request, "You are not authorized to view this page.")
-    return redirect("/")
+    raise PermissionDenied
   return render(request, "users/admin/student-records.html")
 
 @login_required
 def student_home(request):
-  return render(request, "users/student/home.html")
+  appointment = UserAppointment.objects.filter(user=request.user).last()
+  return render(request, "users/student/home.html", {
+    "appointment": appointment
+  })
 
 @login_required
-def student_appointment1(request):
+def student_appointment1(request, appointment_id=None):
   if request.method == "POST":
     form = StudentAppointment1Form(request.POST)
     if form.is_valid():
@@ -155,9 +159,16 @@ def student_appointment1(request):
       print(form.errors)  
       messages.error(request, "Appointment 1 submission failed.")
   else:
-    form = StudentAppointment1Form()
+    if appointment_id:
+      appointment = UserAppointment.objects.get(id=appointment_id)
+    else:
+      appointment = UserAppointment.objects.create(user=request.user)
+    form = StudentAppointment1Form(instance=appointment)
 
-  return render(request, "users/student/appointment-1.html", {"form": form})
+  return render(request, "users/student/appointment-1.html", {
+    "form": form,
+    "appointment": appointment
+  })
 
 @login_required
 def student_appointment2(request, appointment_id):
@@ -229,3 +240,4 @@ def student_profile(request):
     form = StudentProfileUpdateForm(instance=request.user)
 
   return render(request, "users/student/profile.html", {"form": form})
+
