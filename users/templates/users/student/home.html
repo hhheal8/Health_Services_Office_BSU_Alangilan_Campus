@@ -12,9 +12,9 @@
       <h3>How can I help you today?</h3>
 
       {% if appointment %}
-        <button class="btn-appointment" onclick="window.location.href='{% url 'users:student_appointment1' appointment_id=appointment.id %}'">Appointment</button>
+        <button class="btn-appointment" onclick="window.location.href='{% url 'users:student_appointment1_with_id' appointment_id=appointment.id %}'">Appointment</button>
       {% else %}
-        <button class="btn-appointment" onclick="window.location.href='#'">No Appointments</button>
+        <button class="btn-appointment" onclick="window.location.href='{% url 'users:student_appointment1' %}'">Appointment</button>
       {% endif %}
 
     </div>

@@ -26,7 +26,7 @@ class AlangilanUsers(AbstractUser):
   suffix = models.CharField(max_length=10, null=True, blank=True)
   birth_date = models.DateField(null=True, blank=True)
   sr_code = models.CharField(max_length=50, null=False, blank=False)
-  age = models.IntegerField(null=False, blank=False)
+  age = models.IntegerField(null=True, blank=True)
   contact_number = models.CharField(max_length=15, null=True, blank=True)
   telephone_number = models.CharField(max_length=15, null=True, blank=True)
   civil_status = models.CharField(max_length=20, null=True, blank=True)

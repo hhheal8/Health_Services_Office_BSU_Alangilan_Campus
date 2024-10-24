@@ -36,7 +36,7 @@
         <div class="transaction-log">
           <h2>Transaction Log Sheet</h2>
 
-          <form method="POST" action="{% url 'users:student_appointment1' appointment_id=appointment.id %}" class="transaction-log-form">
+          <form method="POST" action="{% if appointment %}{% url 'users:student_appointment1_with_id' appointment_id=appointment.id %}{% else %}{% url 'users:student_appointment1' %}{% endif %}" class="transaction-log-form">
             {% csrf_token %}
 
             <div class="form-group">
@@ -57,11 +57,13 @@
             </div>
             <div class="form-group">
               <label for="course">Course:</label>
-              <input type="text" id="course" name="course" class="form-control" value="{{ request.user.course }}">
+              {% comment %} <input type="text" id="course" name="course" class="form-control" value="{{ request.user.course }}"> {% endcomment %}
+              {{ form.course }}
             </div>
             <div class="form-group">
               <label for="department">Department:</label>
-              <input type="text" id="department" name="department" class="form-control" value="{{ request.user.department }}">
+              {% comment %} <input type="text" id="department" name="department" class="form-control" value="{{ request.user.department }}"> {% endcomment %}
+              {{ form.department }}
             </div>
 
             <div class="form-group">

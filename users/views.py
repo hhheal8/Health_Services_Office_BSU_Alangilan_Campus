@@ -159,10 +159,7 @@ def student_appointment1(request, appointment_id=None):
       print(form.errors)  
       messages.error(request, "Appointment 1 submission failed.")
   else:
-    if appointment_id:
-      appointment = UserAppointment.objects.get(id=appointment_id)
-    else:
-      appointment = UserAppointment.objects.create(user=request.user)
+    appointment = UserAppointment.objects.create(user=request.user)
     form = StudentAppointment1Form(instance=appointment)
 
   return render(request, "users/student/appointment-1.html", {
